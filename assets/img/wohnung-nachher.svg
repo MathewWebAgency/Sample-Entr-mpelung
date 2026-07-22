@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 688" preserveAspectRatio="xMidYMid slice">
+  <title>Leeres Wohnzimmer nach der Entrümpelung, besenrein</title>
+  <!-- Raum-Basis: identisch mit wohnung-vorher.svg -->
+  <rect width="1100" height="540" fill="#ECE7DD"/>
+  <rect y="540" width="1100" height="148" fill="#DFD8C8"/>
+  <line x1="0" y1="590" x2="1100" y2="590" stroke="#CCC3B0" stroke-width="2"/>
+  <line x1="0" y1="638" x2="1100" y2="638" stroke="#CCC3B0" stroke-width="2"/>
+  <rect y="524" width="1100" height="16" fill="#F2EFE9"/>
+  <line x1="0" y1="524" x2="1100" y2="524" stroke="#B9B0A0" stroke-width="2"/>
+  <rect x="110" y="84" width="320" height="306" fill="#F2EFE9" stroke="#141414" stroke-width="3"/>
+  <rect x="132" y="106" width="276" height="262" fill="#D8DFE4"/>
+  <line x1="270" y1="106" x2="270" y2="368" stroke="#F2EFE9" stroke-width="10"/>
+  <line x1="132" y1="237" x2="408" y2="237" stroke="#F2EFE9" stroke-width="10"/>
+  <rect x="142" y="442" width="238" height="74" rx="6" fill="#E8E3D8" stroke="#141414" stroke-width="2.5"/>
+  <line x1="176" y1="454" x2="176" y2="504" stroke="#141414" stroke-width="2"/>
+  <line x1="210" y1="454" x2="210" y2="504" stroke="#141414" stroke-width="2"/>
+  <line x1="244" y1="454" x2="244" y2="504" stroke="#141414" stroke-width="2"/>
+  <line x1="278" y1="454" x2="278" y2="504" stroke="#141414" stroke-width="2"/>
+  <line x1="312" y1="454" x2="312" y2="504" stroke="#141414" stroke-width="2"/>
+  <line x1="346" y1="454" x2="346" y2="504" stroke="#141414" stroke-width="2"/>
+  <rect x="858" y="128" width="172" height="398" fill="#F2EFE9" stroke="#141414" stroke-width="3"/>
+  <rect x="884" y="156" width="120" height="150" fill="none" stroke="#141414" stroke-width="2"/>
+  <rect x="884" y="336" width="120" height="150" fill="none" stroke="#141414" stroke-width="2"/>
+  <circle cx="880" cy="330" r="6" fill="#141414"/>
+  <line x1="588" y1="0" x2="588" y2="64" stroke="#141414" stroke-width="2.5"/>
+  <path d="M556 64 h64 l-14 34 h-36 z" fill="#141414"/>
+  <!-- Besenrein: angelehnter Besen -->
+  <line x1="806" y1="200" x2="768" y2="552" stroke="#8A6B42" stroke-width="7" stroke-linecap="round"/>
+  <path d="M744 546 l52 10 -12 58 -58 -14 z" fill="#D9A441" stroke="#141414" stroke-width="2"/>
+  <line x1="752" y1="560" x2="742" y2="596" stroke="#141414" stroke-width="1.5"/>
+  <line x1="768" y1="563" x2="758" y2="600" stroke="#141414" stroke-width="1.5"/>
+  <line x1="784" y1="566" x2="774" y2="603" stroke="#141414" stroke-width="1.5"/>
+</svg>
