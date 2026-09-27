@@ -87,16 +87,18 @@
 <section class="hero" id="hero" aria-labelledby="hero-title">
   <div class="hero-stage">
     <div class="hero-media">
-      <img class="hero-img hero-img--a" src="assets/img/keller-a-vorher.jpg"
-           srcset="assets/img/keller-a-vorher-750.jpg 750w, assets/img/keller-a-vorher.jpg 1050w"
+      <img class="hero-img hero-img--a" src="assets/img/keller-a-vorher-1050.jpg"
+           srcset="assets/img/keller-a-vorher-750.jpg 750w, assets/img/keller-a-vorher-1050.jpg 1050w, assets/img/keller-a-vorher-1536.jpg 1536w"
            sizes="100vw"
            alt="Vollgestellter Kellerraum in Bochum vor der Entrümpelung: Kartons, Säcke und Geräte stapeln sich bis zur Werkbank"
-           width="1050" height="1400" fetchpriority="high" decoding="async">
-      <img class="hero-img hero-img--b" src="assets/img/keller-a-nachher.jpg"
-           srcset="assets/img/keller-a-nachher-750.jpg 750w, assets/img/keller-a-nachher.jpg 1050w"
-           sizes="100vw"
-           alt="Derselbe Kellerraum leergeräumt und gefegt, die Werkbank steht frei"
-           width="1050" height="1400" decoding="async">
+           width="1536" height="2048" fetchpriority="high" decoding="async">
+      <div class="hero-b">
+        <img class="hero-img hero-img--b" src="assets/img/keller-a-nachher-1050.jpg"
+             srcset="assets/img/keller-a-nachher-750.jpg 746w, assets/img/keller-a-nachher-1050.jpg 1045w, assets/img/keller-a-nachher-1536.jpg 1529w"
+             sizes="100vw"
+             alt="Derselbe Kellerraum leergeräumt und gefegt, die Werkbank steht frei"
+             width="1536" height="2048" decoding="async">
+      </div>
       <span class="hero-seam" aria-hidden="true"></span>
       <span class="hero-scrim" aria-hidden="true"></span>
     </div>
@@ -141,7 +143,9 @@
     <figure class="ba" data-ba>
       <div class="ba-frame">
         <img class="ba-img" src="assets/img/keller-b-nachher.jpg" alt="Derselbe Kellerraum nach der Räumung: das Regal steht leer, der Boden ist gefegt" width="1200" height="1600" loading="lazy" decoding="async">
-        <img class="ba-img ba-img--top" src="assets/img/keller-b-vorher.jpg" alt="Kellerraum vor der Räumung: Regal und Boden voll mit Säcken, Kartons und Hausrat" width="1200" height="1600" loading="lazy" decoding="async">
+        <div class="ba-top">
+          <img class="ba-img ba-img--top" src="assets/img/keller-b-vorher.jpg" alt="Kellerraum vor der Räumung: Regal und Boden voll mit Säcken, Kartons und Hausrat" width="1200" height="1600" loading="lazy" decoding="async">
+        </div>
         <span class="ba-seam" aria-hidden="true"><span class="ba-grip"></span></span>
         <input class="ba-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Vergleich Keller: Regler nach links zeigt vorher, nach rechts zeigt nachher">
       </div>

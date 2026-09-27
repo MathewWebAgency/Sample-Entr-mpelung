@@ -14,17 +14,19 @@
   var hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
 
   var stage = document.querySelector(".hero-stage");
+  var wrapB = document.querySelector(".hero-b");
   var imgB = document.querySelector(".hero-img--b");
   var seam = document.querySelector(".hero-seam");
   var stageW = 0;
 
   function measureStage() { stageW = stage ? stage.getBoundingClientRect().width : 0; }
 
-  /* Die Kante wandert per transform statt per left, das kostet kein Layout.
-     Das Custom Property sitzt am Bild selbst, damit nicht der ganze
-     Hero-Teilbaum bei jedem Frame neu berechnet wird. */
+  /* Kante, Rahmen und Bild bewegen sich nur per transform. Kein clip-path,
+     kein left: Pro Frame wird nichts neu gezeichnet, nur verschoben. */
   function setWipe(v) {
-    if (imgB) imgB.style.setProperty("--wipe", v);
+    var off = ((v - 1) * 100).toFixed(3);
+    if (wrapB) wrapB.style.transform = "translate3d(" + off + "%,0,0)";
+    if (imgB) imgB.style.transform = "translate3d(" + (-off) + "%,0,0)";
     if (seam) seam.style.transform = "translate3d(" + (v * stageW).toFixed(2) + "px,0,0)";
   }
 
@@ -59,16 +61,32 @@
   document.querySelectorAll("[data-ba]").forEach(function (fig) {
     var frame = fig.querySelector(".ba-frame");
     var range = fig.querySelector(".ba-range");
-    if (!frame || !range) return;
+    var top = fig.querySelector(".ba-top");
+    var topImg = fig.querySelector(".ba-img--top");
+    var line = fig.querySelector(".ba-seam");
+    if (!frame || !range || !top || !topImg || !line) return;
 
     function setPos(p) {
       p = Math.min(1, Math.max(0, p));
-      frame.style.setProperty("--pos", p.toFixed(4));
+      var off = ((p - 1) * 100).toFixed(3);
+      top.style.transform = "translate3d(" + off + "%,0,0)";
+      topImg.style.transform = "translate3d(" + (-off) + "%,0,0)";
+      line.style.transform = "translate3d(" + off + "%,0,0)";
       range.value = (p * 100).toFixed(1);
     }
+
+    /* Die Lage des Rahmens wird einmal pro Zug gemessen, nicht bei jeder
+       Mausbewegung, und gezeichnet wird hoechstens einmal pro Frame. */
+    var rect = null, lastX = 0, frameReq = 0;
+    function measure() { rect = frame.getBoundingClientRect(); }
+    function flush() {
+      frameReq = 0;
+      if (rect && rect.width) setPos((lastX - rect.left) / rect.width);
+    }
     function fromEvent(e) {
-      var r = frame.getBoundingClientRect();
-      if (r.width) setPos((e.clientX - r.left) / r.width);
+      if (!rect) measure();
+      lastX = e.clientX;
+      if (!frameReq) frameReq = requestAnimationFrame(flush);
     }
 
     var active = null;   // Pointer-ID des laufenden Zugs, weitere Finger werden ignoriert
@@ -79,6 +97,7 @@
       if (e.pointerType === "mouse" && e.button !== 0) return;
       active = e.pointerId;
       moved = false;
+      measure();
       try { frame.setPointerCapture(e.pointerId); } catch (err) { /* synthetisches Event */ }
       frame.classList.add("is-dragging");
       if (e.pointerType === "mouse") { fromEvent(e); e.preventDefault(); }
@@ -90,8 +109,18 @@
     });
     function end(e) {
       if (e.pointerId !== active) return;
-      if (e.type === "pointerup" && !moved && e.pointerType !== "mouse") fromEvent(e);
+      if (e.type === "pointerup" && !moved && e.pointerType !== "mouse") lastX = e.clientX;
+      if (e.type === "pointerup") {
+        // Letzte Position sofort zeichnen, bevor der Zug endet
+        if (frameReq) cancelAnimationFrame(frameReq);
+        if (!rect) measure();
+        flush();
+      } else if (frameReq) {
+        cancelAnimationFrame(frameReq);
+        frameReq = 0;
+      }
       active = null;
+      rect = null;
       frame.classList.remove("is-dragging");
     }
     frame.addEventListener("pointerup", end);

@@ -291,3 +291,20 @@ pan-y` lässt senkrechtes Scrollen durch. Auf Touch springt die Kante nicht
 schon beim Aufsetzen, sondern folgt erst beim waagerechten Ziehen oder beim
 kurzen Antippen. Weitere Finger werden ignoriert. Der native Regler bleibt
 unsichtbar für Tastatur und Screenreader.
+
+## Flüssig am Desktop: nur noch transform
+
+Beide Vergleiche (Hero und Regler) schneiden das Bild nicht mehr mit
+`clip-path` zu. Stattdessen fährt ein Rahmen mit `overflow: hidden` herein und
+das Bild darin genau gegenläufig, sodass es an seinem Platz stehen bleibt. Der
+Browser verschiebt pro Frame nur Ebenen, statt das Foto neu zu zeichnen.
+`clip-path` hatte am Desktop mit hoher Pixeldichte geruckelt, weil jedes Frame
+ein Foto von fast 2000 × 1600 Pixeln neu gezeichnet hat. Die Trennlinie des
+Reglers ist eine Ebene über die volle Breite, deren rechte Kante die Linie ist,
+also ebenfalls nur `transform` statt `left`. Mausbewegungen werden auf einen
+Frame gebündelt, der Rahmen wird einmal pro Zug gemessen.
+
+Die Hero-Fotos gibt es jetzt in 750, 1050 und 1536 px Breite, gerechnet aus
+den höher aufgelösten Quellen (Kundenfoto 1536 × 2048, Visualisierung
+1792 × 2400), mit leichter Entrauschung vor dem Aufhellen. Am Desktop lädt
+die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.

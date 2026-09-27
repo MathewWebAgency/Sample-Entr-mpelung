@@ -17,8 +17,6 @@
   font-weight: 200 700; font-style: normal; font-display: swap;
 }
 
-@property --wipe { syntax: "<number>"; inherits: false; initial-value: 0; }
-@property --pos  { syntax: "<number>"; inherits: true;  initial-value: 0.5; }
 
 :root {
   --klar:        #F4F5F2;
@@ -182,7 +180,12 @@ input, select, textarea { font: inherit; color: inherit; }
 }
 .hero-media { position: absolute; inset: 0; }
 .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
-.hero-img--b { clip-path: inset(0 calc((1 - var(--wipe)) * 100%) 0 0); }
+/* Die Kante ohne clip-path: Der Rahmen faehrt von links herein, das Bild darin
+   faehrt genau gegenlaeufig. Sichtbar bleibt es an seinem Platz, und der
+   Browser muss pro Frame nur zwei Ebenen verschieben statt das ganze Foto neu
+   zu zeichnen. clip-path hat am Desktop mit hoher Pixeldichte geruckelt. */
+.hero-b { position: absolute; inset: 0; overflow: hidden; transform: translate3d(-100%, 0, 0); will-change: transform; }
+.hero-img--b { transform: translate3d(100%, 0, 0); will-change: transform; }
 .hero-seam {
   position: absolute; top: 0; bottom: 0; left: 0; width: 5px; margin-left: -2px;
   background: var(--revier-hell); opacity: 0;
@@ -229,14 +232,17 @@ input, select, textarea { font: inherit; color: inherit; }
 /* ---------- Vorher / Nachher ---------- */
 
 .ba-wrap { max-width: var(--maxw); margin: 0 auto; }
-.ba-frame { position: relative; overflow: hidden; aspect-ratio: 3 / 4; background: var(--kohle-2); max-width: 720px; margin: 0 auto; --pos: 0.5;
+.ba-frame { position: relative; overflow: hidden; aspect-ratio: 3 / 4; background: var(--kohle-2); max-width: 720px; margin: 0 auto;
   /* Senkrecht scrollt die Seite weiter, waagerecht gehoert die Geste dem Regler */
   touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
 .ba-img { -webkit-user-drag: none; pointer-events: none; }
 .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.ba-img--top { clip-path: inset(0 calc((1 - var(--pos)) * 100%) 0 0); }
-.ba-seam { position: absolute; top: 0; bottom: 0; left: calc(var(--pos) * 100%); width: 3px; background: var(--revier-hell); pointer-events: none; display: flex; align-items: center; justify-content: center; }
-.ba-grip { position: relative; width: 52px; height: 52px; flex: none; border-radius: 50%; background: var(--revier); display: grid; place-items: center; transition: background-color 180ms var(--ease-out), transform 150ms var(--ease-out); }
+/* Wie im Hero: Rahmen und Bild laufen gegeneinander, nur transform */
+.ba-top { position: absolute; inset: 0; overflow: hidden; transform: translate3d(-50%, 0, 0); will-change: transform; }
+.ba-img--top { transform: translate3d(50%, 0, 0); will-change: transform; }
+.ba-seam { position: absolute; inset: 0; pointer-events: none; transform: translate3d(-50%, 0, 0); will-change: transform; }
+.ba-seam::before { content: ""; position: absolute; top: 0; bottom: 0; right: -1.5px; width: 3px; background: var(--revier-hell); }
+.ba-grip { position: absolute; top: 50%; right: -26px; margin-top: -26px; width: 52px; height: 52px; border-radius: 50%; background: var(--revier); display: grid; place-items: center; transition: background-color 180ms var(--ease-out), transform 150ms var(--ease-out); }
 .ba-frame.is-dragging .ba-grip { transform: scale(0.94); }
 .ba-grip::before, .ba-grip::after { content: ""; position: absolute; top: 50%; left: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-top: 2px solid #fff; border-right: 2px solid #fff; }
 .ba-grip::before { transform: translateX(-8px) rotate(-135deg); }
@@ -316,7 +322,8 @@ input, select, textarea { font: inherit; color: inherit; }
 .faq-a-in p { padding-bottom: 1.5rem; max-width: 58ch; color: var(--beton); opacity: 0; transform: translateY(6px); transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
 .faq-item.is-open .faq-a { grid-template-rows: 1fr; transition-duration: 280ms; }
 .faq-item.is-open .faq-a-in p { opacity: 1; transform: none; transition-delay: 80ms; }
-html:not(.js) .hero-img--b { clip-path: inset(0 50% 0 0); }
+html:not(.js) .hero-b { transform: translate3d(-50%, 0, 0); }
+html:not(.js) .hero-img--b { transform: translate3d(50%, 0, 0); }
 html:not(.js) .hero-seam { opacity: 1; left: 50%; transform: none; }
 html:not(.js) .faq-a { grid-template-rows: 1fr; }
 html:not(.js) .faq-a-in p { opacity: 1; transform: none; }
@@ -433,7 +440,8 @@ html:not(.js) .faq-ico { display: none; }
 
 /* ---------- Statischer Modus ---------- */
 
-.static-mode .hero-img--b { clip-path: inset(0 50% 0 0); }
+.static-mode .hero-b { transform: translate3d(-50%, 0, 0); }
+.static-mode .hero-img--b { transform: translate3d(50%, 0, 0); }
 .static-mode .hero-seam { opacity: 1; left: 50%; transform: none; }
 .static-mode [data-reveal], .static-mode [data-step], .static-mode [data-line] > * { opacity: 1 !important; transform: none !important; }
 .static-mode .abl-bar { height: 100%; transform: none !important; }
@@ -444,7 +452,7 @@ html:not(.js) .faq-ico { display: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
   .btn:hover, .btn:active, .head-cta:active { transform: none !important; }
   .abl-bar { transform: none !important; }
-  .hero-img { transform: none !important; }
+  .hero-img--a { transform: none !important; }
   .head-nav a::after, .leist li::after { transition: none !important; }
   .faq-a { transition: none !important; }
   .head { transition: none !important; }
