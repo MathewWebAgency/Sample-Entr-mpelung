@@ -282,3 +282,12 @@ Knöpfe sind Pillen (`--r-knopf: 999px`), Eingabefelder weich gerundet
 (`--r-feld: 12px`), Bilder und Flächen bleiben eckig. Im Hero stehen unter
 „Kostenlose Besichtigung“ beide Telefonnummern als Paar, unter 360 px
 Breite untereinander.
+
+## Vorher/Nachher-Regler
+
+Gezogen wird über Pointer Events auf dem Bild, nicht mehr über den nativen
+Schieberegler, der auf dem Handy nur auf den Knopf reagierte. `touch-action:
+pan-y` lässt senkrechtes Scrollen durch. Auf Touch springt die Kante nicht
+schon beim Aufsetzen, sondern folgt erst beim waagerechten Ziehen oder beim
+kurzen Antippen. Weitere Finger werden ignoriert. Der native Regler bleibt
+unsichtbar für Tastatur und Screenreader.

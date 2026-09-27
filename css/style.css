@@ -229,20 +229,25 @@ input, select, textarea { font: inherit; color: inherit; }
 /* ---------- Vorher / Nachher ---------- */
 
 .ba-wrap { max-width: var(--maxw); margin: 0 auto; }
-.ba-frame { position: relative; overflow: hidden; aspect-ratio: 3 / 4; background: var(--kohle-2); max-width: 720px; margin: 0 auto; --pos: 0.5; }
+.ba-frame { position: relative; overflow: hidden; aspect-ratio: 3 / 4; background: var(--kohle-2); max-width: 720px; margin: 0 auto; --pos: 0.5;
+  /* Senkrecht scrollt die Seite weiter, waagerecht gehoert die Geste dem Regler */
+  touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.ba-img { -webkit-user-drag: none; pointer-events: none; }
 .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ba-img--top { clip-path: inset(0 calc((1 - var(--pos)) * 100%) 0 0); }
 .ba-seam { position: absolute; top: 0; bottom: 0; left: calc(var(--pos) * 100%); width: 3px; background: var(--revier-hell); pointer-events: none; display: flex; align-items: center; justify-content: center; }
-.ba-grip { width: 52px; height: 52px; flex: none; border-radius: 50%; background: var(--revier); display: grid; place-items: center; transition: background-color 180ms var(--ease-out), transform 150ms var(--ease-out); }
-.ba-frame:active .ba-grip { transform: scale(0.94); }
-.ba-grip::before, .ba-grip::after { content: ""; position: absolute; width: 8px; height: 8px; border-top: 2px solid #fff; border-right: 2px solid #fff; }
-.ba-grip::before { transform: rotate(-135deg); margin-left: -15px; }
-.ba-grip::after  { transform: rotate(45deg);   margin-left: 15px; }
+.ba-grip { position: relative; width: 52px; height: 52px; flex: none; border-radius: 50%; background: var(--revier); display: grid; place-items: center; transition: background-color 180ms var(--ease-out), transform 150ms var(--ease-out); }
+.ba-frame.is-dragging .ba-grip { transform: scale(0.94); }
+.ba-grip::before, .ba-grip::after { content: ""; position: absolute; top: 50%; left: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-top: 2px solid #fff; border-right: 2px solid #fff; }
+.ba-grip::before { transform: translateX(-8px) rotate(-135deg); }
+.ba-grip::after  { transform: translateX(8px) rotate(45deg); }
 .ba-frame:hover .ba-grip { background: #386814; }
-.ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; background: none; }
+/* Der native Regler bleibt fuer Tastatur und Screenreader, Finger und Maus
+   laufen ueber die Pointer-Logik in main.js */
+.ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; -webkit-appearance: none; appearance: none; background: none; }
 .ba-range::-webkit-slider-thumb { -webkit-appearance: none; width: 54px; height: 100%; }
 .ba-range::-moz-range-thumb { width: 54px; height: 100%; border: 0; opacity: 0; }
-.ba-frame:focus-within .ba-grip { outline: 3px solid var(--revier-hell); outline-offset: 4px; }
+.ba-frame:has(.ba-range:focus-visible) .ba-grip { outline: 3px solid var(--revier-hell); outline-offset: 4px; }
 .ba-ends { max-width: 720px; margin: 0.9rem auto 0; display: flex; justify-content: space-between; font-weight: 600; color: var(--klar); }
 .ba-ends span:last-child { color: var(--revier-hell); }
 .ba-cap { max-width: 720px; margin: 1.4rem auto 0; font-size: 0.95rem; color: var(--beton-hell); }

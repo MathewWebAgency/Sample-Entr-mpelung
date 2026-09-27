@@ -51,13 +51,55 @@
 
   /* ---------- Vorher/Nachher-Regler ---------- */
 
+  /* Ziehen mit Finger oder Maus ueber Pointer Events. Der unsichtbare native
+     Regler bleibt fuer die Tastatur und wird mitgefuehrt. Auf dem Handy
+     springt die Kante nicht schon beim Aufsetzen, sonst wuerde jeder, der
+     nur an dem Bild vorbeiscrollt, sie verschieben. Sie folgt erst, wenn der
+     Finger waagerecht zieht, oder beim kurzen Antippen. */
   document.querySelectorAll("[data-ba]").forEach(function (fig) {
     var frame = fig.querySelector(".ba-frame");
     var range = fig.querySelector(".ba-range");
     if (!frame || !range) return;
-    function apply() { frame.style.setProperty("--pos", (parseFloat(range.value) / 100).toFixed(4)); }
-    range.addEventListener("input", apply);
-    apply();
+
+    function setPos(p) {
+      p = Math.min(1, Math.max(0, p));
+      frame.style.setProperty("--pos", p.toFixed(4));
+      range.value = (p * 100).toFixed(1);
+    }
+    function fromEvent(e) {
+      var r = frame.getBoundingClientRect();
+      if (r.width) setPos((e.clientX - r.left) / r.width);
+    }
+
+    var active = null;   // Pointer-ID des laufenden Zugs, weitere Finger werden ignoriert
+    var moved = false;
+
+    frame.addEventListener("pointerdown", function (e) {
+      if (active !== null) return;
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      active = e.pointerId;
+      moved = false;
+      try { frame.setPointerCapture(e.pointerId); } catch (err) { /* synthetisches Event */ }
+      frame.classList.add("is-dragging");
+      if (e.pointerType === "mouse") { fromEvent(e); e.preventDefault(); }
+    });
+    frame.addEventListener("pointermove", function (e) {
+      if (e.pointerId !== active) return;
+      moved = true;
+      fromEvent(e);
+    });
+    function end(e) {
+      if (e.pointerId !== active) return;
+      if (e.type === "pointerup" && !moved && e.pointerType !== "mouse") fromEvent(e);
+      active = null;
+      frame.classList.remove("is-dragging");
+    }
+    frame.addEventListener("pointerup", end);
+    frame.addEventListener("pointercancel", end);
+    frame.addEventListener("dragstart", function (e) { e.preventDefault(); });
+
+    range.addEventListener("input", function () { setPos(parseFloat(range.value) / 100); });
+    setPos(parseFloat(range.value) / 100);
   });
 
   /* ---------- Fragen ---------- */
