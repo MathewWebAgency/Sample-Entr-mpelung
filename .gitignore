@@ -1,1 +1,5 @@
+_review/
+_input/
 .DS_Store
+.impeccable/
+node_modules/

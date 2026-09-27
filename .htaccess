@@ -1,0 +1,26 @@
+# ---------------------------------------------------------------
+# REVIERKLAR: Wurzel des Repositorys = Wurzel der Website = public_html.
+# Die Seite liegt direkt oben (kein Unterordner), deshalb keine
+# Umschreibung. Diese Datei sperrt nur, was nicht oeffentlich sein soll.
+# ---------------------------------------------------------------
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS erzwingen
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  # Zertifikatspruefung von Hostinger nicht anfassen
+  RewriteRule ^\.well-known/ - [L]
+
+  # Interne Dateien: Doku, Konzept, Git- und Editor-Ordner
+  RewriteRule (^|/)\.(git|gitignore|claude|agents|impeccable)(/|$) - [R=404,L]
+  RewriteRule \.md$ - [R=404,L]
+</IfModule>
+
+<FilesMatch "\.(md|gitignore|lock)$">
+  Require all denied
+</FilesMatch>
