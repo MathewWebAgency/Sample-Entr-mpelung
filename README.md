@@ -308,3 +308,18 @@ Die Hero-Fotos gibt es jetzt in 750, 1050 und 1536 px Breite, gerechnet aus
 den höher aufgelösten Quellen (Kundenfoto 1536 × 2048, Visualisierung
 1792 × 2400), mit leichter Entrauschung vor dem Aufhellen. Am Desktop lädt
 die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
+
+## Tablet, Cache, Touch-Schwelle
+
+- **Versionsnummern:** `css/style.css?v=JJJJMMTT` und `js/main.js?v=JJJJMMTT`
+  in allen HTML-Dateien und in `anfrage.php`. Bei jeder Änderung an CSS oder
+  JS das Datum überall hochzählen, sonst mischen Browser neue HTML mit alter
+  CSS aus dem Cache. Genau das hat zweimal wie ein kaputter Regler ausgesehen.
+- **Navigation:** Braucht rund 820 px. Unter 896 px (56rem) ist sie
+  ausgeblendet, Logo und „Besichtigung“ bleiben. Links trennen nie mehr
+  (`white-space: nowrap`, `hyphens: none`).
+- **Hero ab Tablet:** Mehr Abstand unter den Telefonnummern
+  (`clamp(4rem, 11vh, 8rem)`), das Foto läuft sichtbar weiter.
+- **Regler auf Touch:** Folgt erst, wenn der Finger eindeutig waagerecht zieht
+  (dx > 6 px und dx > dy). Ohne waagerechten Zug zählt es als Antippen und
+  springt an die Stelle, auch wenn der Finger dabei leicht wackelt.

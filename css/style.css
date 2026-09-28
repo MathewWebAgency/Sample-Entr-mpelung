@@ -149,7 +149,7 @@ input, select, textarea { font: inherit; color: inherit; }
 
 
 .head-nav { display: flex; gap: clamp(0.9rem, 2.2vw, 2rem); }
-.head-nav a { position: relative; font-size: 0.95rem; font-weight: 500; padding: 0.7em 0; }
+.head-nav a { position: relative; font-size: 0.95rem; font-weight: 500; padding: 0.7em 0; white-space: nowrap; hyphens: none; }
 .head-brand { display: flex; align-items: center; margin-right: auto; flex: none; min-height: 44px; }
 .head-brand img {
   width: auto; height: clamp(40px, 5.6vw, 54px);
@@ -406,8 +406,15 @@ html:not(.js) .faq-ico { display: none; }
 
 /* ---------- Viewports ---------- */
 
+/* Die Navigation braucht rund 820 px, darunter bleiben Logo und Besichtigung */
+@media (max-width: 55.99rem) {
+  .head-nav { display: none; }
+}
+
 @media (min-width: 48rem) {
   .kon-grid { grid-template-columns: 1fr 1fr; }
+  /* Unter den Telefonnummern bleibt Luft, das Foto laeuft sichtbar weiter */
+  .hero-copy { padding-bottom: clamp(4rem, 11vh, 8rem); }
   .pr-facts { column-gap: clamp(2.5rem, 6vw, 5rem); }
 }
 @media (min-width: 62rem) {
@@ -418,7 +425,6 @@ html:not(.js) .faq-ico { display: none; }
   .leist li { grid-template-columns: 1fr; }
 }
 @media (max-width: 47.99rem) {
-  .head-nav { display: none; }
   .hero-cta { margin-left: 0; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
   .hero-cta .btn--solid { grid-column: 1 / -1; }
   .btn--tel { padding-inline: 0.6em; font-size: 0.94rem; gap: 0.45em; }

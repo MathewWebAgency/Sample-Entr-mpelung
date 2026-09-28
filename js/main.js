@@ -90,13 +90,14 @@
     }
 
     var active = null;   // Pointer-ID des laufenden Zugs, weitere Finger werden ignoriert
-    var moved = false;
+    var startX = 0, startY = 0, engaged = false;
 
     frame.addEventListener("pointerdown", function (e) {
       if (active !== null) return;
       if (e.pointerType === "mouse" && e.button !== 0) return;
       active = e.pointerId;
-      moved = false;
+      startX = e.clientX; startY = e.clientY;
+      engaged = e.pointerType === "mouse";
       measure();
       try { frame.setPointerCapture(e.pointerId); } catch (err) { /* synthetisches Event */ }
       frame.classList.add("is-dragging");
@@ -104,12 +105,17 @@
     });
     frame.addEventListener("pointermove", function (e) {
       if (e.pointerId !== active) return;
-      moved = true;
+      if (!engaged) {
+        // Auf Touch erst folgen, wenn der Finger eindeutig waagerecht zieht
+        var dx = Math.abs(e.clientX - startX), dy = Math.abs(e.clientY - startY);
+        if (dx > 6 && dx > dy) engaged = true; else return;
+      }
       fromEvent(e);
     });
     function end(e) {
       if (e.pointerId !== active) return;
-      if (e.type === "pointerup" && !moved && e.pointerType !== "mouse") lastX = e.clientX;
+      // Ohne waagerechten Zug war es ein Antippen: dorthin springen
+      if (e.type === "pointerup" && !engaged) lastX = e.clientX;
       if (e.type === "pointerup") {
         // Letzte Position sofort zeichnen, bevor der Zug endet
         if (frameReq) cancelAnimationFrame(frameReq);
