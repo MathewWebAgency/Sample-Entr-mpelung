@@ -344,6 +344,7 @@ die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
   ist. Auf Impressum, Datenschutz und Danke-Seite ist er immer sichtbar.
 - **Höhe:** Logo-Breite und Hero-Überschrift sind zusätzlich an der
   Bildschirmhöhe begrenzt, damit sich auf flachen Laptops nichts überlappt.
-- **Telefonknöpfe:** P. Trujilo (0176 32078800, links) und A. Varli
+- **Telefonknöpfe:** P. Trujillo (0176 32078800, links) und A. Varli
   (0176 45620735, rechts). Am Desktop steht der Name neben, auf dem Handy unter
-  der Nummer.
+  der Nummer. Im Kontaktbereich und im Footer stehen die Namen ebenfalls bei
+  den Nummern.

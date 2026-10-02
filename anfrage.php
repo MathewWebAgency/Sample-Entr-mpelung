@@ -206,7 +206,7 @@ $hinweise = $ergebnis['fehler'] ? array_values($ergebnis['fehler']) : [$ergebnis
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Anfrage nicht gesendet | REVIERKLAR</title>
-<link rel="stylesheet" href="css/style.css?v=2026100202">
+<link rel="stylesheet" href="css/style.css?v=2026100203">
 </head>
 <body>
 <main class="legal"><div class="legal-in">

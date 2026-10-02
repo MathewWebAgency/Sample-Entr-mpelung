@@ -353,7 +353,7 @@ html:not(.js) .faq-ico { display: none; }
 .kon-wa { margin-top: 2rem; }
 .kon-wege { margin: 1.8rem 0 1.4rem; display: grid; gap: 0.15rem; }
 .kon-wege a {
-  display: inline-flex; align-items: center; min-height: 44px;
+  display: inline-flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.75rem; min-height: 44px;
   font-family: var(--f-display); font-weight: 700; font-size: clamp(1.3rem, 3vw, 1.9rem);
   line-height: 1.15; letter-spacing: -0.03em; word-break: break-word;
   text-decoration: underline; text-decoration-color: transparent;
@@ -361,6 +361,8 @@ html:not(.js) .faq-ico { display: none; }
   transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
 }
 .kon-wege a:hover { color: var(--revier-hell); text-decoration-color: var(--revier-hell); }
+/* Name klein neben der Nummer, in der ruhigen Textschrift */
+.kon-name { font-family: var(--f-text); font-weight: 500; font-size: 1rem; letter-spacing: 0; color: var(--beton-hell); }
 .kon-adr { color: var(--beton-hell); }
 
 .kon-form { position: relative; display: grid; gap: 1rem; align-content: start; }
