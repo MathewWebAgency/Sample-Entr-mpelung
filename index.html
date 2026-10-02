@@ -21,7 +21,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=20260928">
+<link rel="stylesheet" href="css/style.css?v=2026100202">
 <script>document.documentElement.classList.add("js");</script>
 
 <script type="application/ld+json">
@@ -103,14 +103,26 @@
       <span class="hero-scrim" aria-hidden="true"></span>
     </div>
 
+    <!-- Das grosse Logo, freigestellt auf dem Foto. Gegen Ende der Kante
+         schrumpft es genau auf die Stelle des Header-Logos, dabei kommt der
+         helle Grund dazu, dann blendet der Header darum herum ein. -->
+    <div class="hero-top" aria-hidden="true">
+      <div class="hero-logo">
+        <span class="hero-logo-bg"></span>
+        <img class="hero-logo-img" src="assets/img/logo-hero-1155.webp"
+             srcset="assets/img/logo-hero-660.webp 660w, assets/img/logo-hero-1155.webp 1155w"
+             sizes="(min-width: 48rem) 34rem, 100vw" alt="" width="1155" height="428" decoding="async">
+      </div>
+    </div>
+
     <div class="hero-copy">
       <h1 class="hero-title" id="hero-title">Wir schaffen<br>Platz im <span class="gruen">Revier.</span></h1>
       <p class="hero-sub">Entrümpelung und Haushaltsauflösung in Bochum und im Revier. Mit festem Preis, mit Sorgfalt für Ihre Sachen und ohne Überraschung am Ende.</p>
       <div class="hero-foot">
         <div class="hero-cta">
           <a class="btn btn--solid" href="#kontakt">Kostenlose Besichtigung</a>
-          <a class="btn btn--line btn--tel" href="tel:+4917632078800" aria-label="Anrufen: 0176 32078800"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,154.8l-47.09-21.11-.18-.08a19.94,19.94,0,0,0-19,1.75,13.08,13.08,0,0,0-1.12.84l-22.31,19c-13-7.05-26.43-20.37-33.49-33.21l19.06-22.66a11.76,11.76,0,0,0,.85-1.15,20,20,0,0,0,1.66-18.83,1.42,1.42,0,0,1-.08-.18L101.2,32A20.06,20.06,0,0,0,80.42,20.15,60.27,60.27,0,0,0,28,80c0,81.61,66.39,148,148,148a60.27,60.27,0,0,0,59.85-52.42A20.06,20.06,0,0,0,224,154.8ZM176,204A124.15,124.15,0,0,1,52,80,36.29,36.29,0,0,1,80.48,44.46l18.82,42L80.14,109.28a12,12,0,0,0-.86,1.16A20,20,0,0,0,78,130.08c9.42,19.28,28.83,38.56,48.31,48A20,20,0,0,0,146,176.63a11.63,11.63,0,0,0,1.11-.85l22.43-19.07,42,18.81A36.29,36.29,0,0,1,176,204Z"/></svg>0176 32078800</a>
-          <a class="btn btn--line btn--tel" href="tel:+4917645620735" aria-label="Anrufen: 0176 45620735"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,154.8l-47.09-21.11-.18-.08a19.94,19.94,0,0,0-19,1.75,13.08,13.08,0,0,0-1.12.84l-22.31,19c-13-7.05-26.43-20.37-33.49-33.21l19.06-22.66a11.76,11.76,0,0,0,.85-1.15,20,20,0,0,0,1.66-18.83,1.42,1.42,0,0,1-.08-.18L101.2,32A20.06,20.06,0,0,0,80.42,20.15,60.27,60.27,0,0,0,28,80c0,81.61,66.39,148,148,148a60.27,60.27,0,0,0,59.85-52.42A20.06,20.06,0,0,0,224,154.8ZM176,204A124.15,124.15,0,0,1,52,80,36.29,36.29,0,0,1,80.48,44.46l18.82,42L80.14,109.28a12,12,0,0,0-.86,1.16A20,20,0,0,0,78,130.08c9.42,19.28,28.83,38.56,48.31,48A20,20,0,0,0,146,176.63a11.63,11.63,0,0,0,1.11-.85l22.43-19.07,42,18.81A36.29,36.29,0,0,1,176,204Z"/></svg>0176 45620735</a>
+          <a class="btn btn--line btn--tel" href="tel:+4917632078800" aria-label="P. Trujilo anrufen: 0176 32078800"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,154.8l-47.09-21.11-.18-.08a19.94,19.94,0,0,0-19,1.75,13.08,13.08,0,0,0-1.12.84l-22.31,19c-13-7.05-26.43-20.37-33.49-33.21l19.06-22.66a11.76,11.76,0,0,0,.85-1.15,20,20,0,0,0,1.66-18.83,1.42,1.42,0,0,1-.08-.18L101.2,32A20.06,20.06,0,0,0,80.42,20.15,60.27,60.27,0,0,0,28,80c0,81.61,66.39,148,148,148a60.27,60.27,0,0,0,59.85-52.42A20.06,20.06,0,0,0,224,154.8ZM176,204A124.15,124.15,0,0,1,52,80,36.29,36.29,0,0,1,80.48,44.46l18.82,42L80.14,109.28a12,12,0,0,0-.86,1.16A20,20,0,0,0,78,130.08c9.42,19.28,28.83,38.56,48.31,48A20,20,0,0,0,146,176.63a11.63,11.63,0,0,0,1.11-.85l22.43-19.07,42,18.81A36.29,36.29,0,0,1,176,204Z"/></svg><span class="tel-txt"><span class="tel-nr">0176 32078800</span><span class="tel-name">P. Trujilo</span></span></a>
+          <a class="btn btn--line btn--tel" href="tel:+4917645620735" aria-label="A. Varli anrufen: 0176 45620735"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,154.8l-47.09-21.11-.18-.08a19.94,19.94,0,0,0-19,1.75,13.08,13.08,0,0,0-1.12.84l-22.31,19c-13-7.05-26.43-20.37-33.49-33.21l19.06-22.66a11.76,11.76,0,0,0,.85-1.15,20,20,0,0,0,1.66-18.83,1.42,1.42,0,0,1-.08-.18L101.2,32A20.06,20.06,0,0,0,80.42,20.15,60.27,60.27,0,0,0,28,80c0,81.61,66.39,148,148,148a60.27,60.27,0,0,0,59.85-52.42A20.06,20.06,0,0,0,224,154.8ZM176,204A124.15,124.15,0,0,1,52,80,36.29,36.29,0,0,1,80.48,44.46l18.82,42L80.14,109.28a12,12,0,0,0-.86,1.16A20,20,0,0,0,78,130.08c9.42,19.28,28.83,38.56,48.31,48A20,20,0,0,0,146,176.63a11.63,11.63,0,0,0,1.11-.85l22.43-19.07,42,18.81A36.29,36.29,0,0,1,176,204Z"/></svg><span class="tel-txt"><span class="tel-nr">0176 45620735</span><span class="tel-name">A. Varli</span></span></a>
         </div>
       </div>
     </div>
@@ -348,6 +360,6 @@
 <script src="assets/js/gsap.min.js" defer></script>
 <script src="assets/js/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/lenis.min.js" defer></script>
-<script src="js/main.js?v=20260928" defer></script>
+<script src="js/main.js?v=2026100202" defer></script>
 </body>
 </html>

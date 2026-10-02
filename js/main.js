@@ -33,22 +33,25 @@
   measureStage();
   window.addEventListener("resize", measureStage, { passive: true });
 
-  /* ---------- Header ab dem ersten Scrollen ----------
-     Der erste Bildschirm gehoert dem Hero allein. Sobald jemand scrollt und
-     die Kante anlaeuft, faehrt der Header ein. Beobachtet wird ein kleiner
-     Marker am Dokumentanfang, nicht der Hero: Der ist waehrend der Animation
-     gepinnt und bliebe fuer einen Observer die ganze Zeit sichtbar. */
+  /* ---------- Header erst nach dem Hero ----------
+     Im Hero steht das grosse Logo, der Header ist ganz weg. Er blendet ein,
+     wenn die Hero-Animation durch ist (siehe heroTl) bzw. im statischen
+     Modus, wenn der Hero aus dem Bild gescrollt ist. */
   var head = document.querySelector(".head[data-over-hero]");
-  if (head && "IntersectionObserver" in window) {
-    var mark = document.createElement("div");
-    mark.className = "head-mark";
-    mark.setAttribute("aria-hidden", "true");
-    document.body.prepend(mark);
+  var headOn = false;
+  function setHead(on) {
+    if (!head || on === headOn) return;
+    headOn = on;
+    head.classList.toggle("is-shown", on);
+  }
+  function headWhenHeroGone() {
+    var hero = document.querySelector(".hero");
+    if (!head || !hero || !("IntersectionObserver" in window)) { setHead(true); return; }
+    var headH = parseInt(getComputedStyle(root).getPropertyValue("--head-h"), 10) || 76;
     new IntersectionObserver(function (entries) {
-      head.classList.toggle("is-shown", !entries[entries.length - 1].isIntersecting);
-    }).observe(mark);
-  } else if (head) {
-    head.classList.add("is-shown");
+      var e = entries[entries.length - 1];
+      setHead(!e.isIntersecting && e.boundingClientRect.top < 0);
+    }, { rootMargin: "-" + headH + "px 0px 0px 0px" }).observe(hero);
   }
 
   /* ---------- Vorher/Nachher-Regler ---------- */
@@ -248,6 +251,7 @@
   function goStatic() {
     root.classList.add("static-mode");
     measureStage();
+    headWhenHeroGone();
   }
 
   if (STATIC || !hasGsap) {
@@ -288,10 +292,12 @@
   gsap.set(".hero-title", { opacity: 0, y: 26 });
   gsap.set(".hero-sub, .hero-foot", { opacity: 0, y: 18 });
   gsap.set(imgA, { scale: 1.06 });
+  gsap.set(".hero-logo-img", { opacity: 0, y: 14 });
   setWipe(0);
 
   gsap.timeline({ delay: 0.1 })
     .to(imgA, { scale: 1, duration: 1.9, ease: "power2.out" }, 0)
+    .to(".hero-logo-img", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.05)
     .to(".hero-title", { opacity: 1, y: 0, duration: 0.85, ease: "power3.out" }, 0.18)
     .to(".hero-sub", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.48)
     .to(".hero-foot", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.6);
@@ -300,6 +306,10 @@
 
   var state = { wipe: 0 };
   var heroTl = gsap.timeline({
+    /* Der Header haengt am Fortschritt der Animation selbst, nicht an der
+       Scrollposition: scrub laeuft dem Scrollen hinterher, sonst kaeme der
+       Header, waehrend das Logo noch fliegt. */
+    onUpdate: function () { setHead(heroTl.progress() > 0.995); },
     scrollTrigger: {
       trigger: ".hero",
       start: "top top",
@@ -314,6 +324,36 @@
   }, 0);
   heroTl.to(seam, { opacity: 1, duration: 0.05, ease: "power1.out" }, 0.02);
   heroTl.to(seam, { opacity: 0, duration: 0.08, ease: "power1.in" }, 0.9);
+
+  /* Das grosse Logo dockt an: Im letzten Drittel schrumpft die Tafel und
+     gleitet so, dass ihr Logo genau auf dem Header-Logo landet, gleiche
+     Stelle, gleiche Groesse. Gemessen wird mit offset*-Werten, die von
+     transform unberuehrt bleiben, und bei jedem Refresh neu. */
+  var plate = document.querySelector(".hero-logo");
+  var plateImg = plate && plate.querySelector(".hero-logo-img");
+  var headImg = head && head.querySelector(".head-brand img");
+  function offsetIn(el, stop) {
+    var x = 0, y = 0;
+    while (el && el !== stop) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; }
+    return { x: x, y: y };
+  }
+  function dock(axis) {
+    var p = offsetIn(plate, stage);
+    var h = offsetIn(headImg, head);
+    var s = headImg.offsetWidth / plateImg.offsetWidth;
+    if (axis === "s") return s;
+    if (axis === "x") return h.x - p.x - plateImg.offsetLeft * s;
+    return h.y - p.y - plateImg.offsetTop * s;
+  }
+  if (plate && plateImg && headImg) {
+    heroTl.fromTo(plate, { x: 0, y: 0, scale: 1 }, {
+      x: function () { return dock("x"); },
+      y: function () { return dock("y"); },
+      scale: function () { return dock("s"); },
+      ease: "power2.inOut", duration: 0.34
+    }, 0.64);
+    heroTl.to(".hero-logo-bg", { opacity: 1, duration: 0.2, ease: "power1.out" }, 0.7);
+  }
 
   /* ---------- Sektionen ---------- */
 

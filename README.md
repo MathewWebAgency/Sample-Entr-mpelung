@@ -323,3 +323,27 @@ die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
 - **Regler auf Touch:** Folgt erst, wenn der Finger eindeutig waagerecht zieht
   (dx > 6 px und dx > dy). Ohne waagerechten Zug zählt es als Antippen und
   springt an die Stelle, auch wenn der Finger dabei leicht wackelt.
+
+## Großes Logo im Hero, Header erst nach der Animation
+
+- **Start:** Das Logo steht groß und freigestellt auf dem Foto
+  (`logo-hero-660/1155.webp`, transparenter Grund). Freigestellt wurde nur der
+  äußere Hintergrund und die Buchstaben-Innenräume, Transporter und Hauswand
+  bleiben weiß. Der Schriftzug „Wir schaffen Platz im Revier.“ ist
+  herausgeschnitten, er steht direkt darunter als Überschrift. Gleicher
+  Ausschnitt wie `logo-header.png`, damit beide deckungsgleich sind.
+  Freistellungs-Rohdaten unter `_review/logo-hero/`.
+- **Andocken:** Im letzten Drittel der Hero-Animation (64 bis 98 %) schrumpft
+  das Logo und gleitet exakt auf die Stelle des Header-Logos. Dabei blendet der
+  helle Grund ein (70 bis 90 %). Gemessen mit `offset*`-Werten bei jedem
+  Refresh, Abweichung unter 1 px auf allen getesteten Größen.
+- **Header:** Während des ganzen Hero ausgeblendet (`opacity: 0`, nicht
+  klickbar), auch der Knopf „Besichtigung“. Er blendet ein, wenn die Animation
+  bei 99,5 % ist, gekoppelt an den Fortschritt der Zeitleiste, nicht an die
+  Scrollposition. Im statischen Modus erscheint er, wenn der Hero aus dem Bild
+  ist. Auf Impressum, Datenschutz und Danke-Seite ist er immer sichtbar.
+- **Höhe:** Logo-Breite und Hero-Überschrift sind zusätzlich an der
+  Bildschirmhöhe begrenzt, damit sich auf flachen Laptops nichts überlappt.
+- **Telefonknöpfe:** P. Trujilo (0176 32078800, links) und A. Varli
+  (0176 45620735, rechts). Am Desktop steht der Name neben, auf dem Handy unter
+  der Nummer.
