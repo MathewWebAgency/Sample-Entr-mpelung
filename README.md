@@ -245,36 +245,23 @@ vorher mit Seitenhieben auf die Konkurrenz gearbeitet haben.
   Die Fassung vor der Umrechnung liegt unter `_review/`.
 - **FAQ im JSON-LD** ist jetzt wortgleich mit den sichtbaren Antworten.
 
-## Anfrageformular (echt, PHP)
+## Anfrageformular (Formspree)
 
-Das Formular schickt an `anfrage.php`, das die Anfrage prüft und per PHP
-`mail()` an revierklar.nrw@gmx.de schickt. Kein Fremddienst, keine Datenbank.
+Das Formular schickt an Formspree (`https://formspree.io/f/mwlpgjlr`), Formspree
+stellt die Anfrage per E-Mail zu. `anfrage.php` und `danke.html` sind entfernt.
 
-- **Mit JavaScript:** Versand im Hintergrund, Knopf zeigt „Wird gesendet …“,
-  danach eine Dankesmeldung an der Stelle des Formulars. Fehler erscheinen
-  direkt am Feld.
-- **Ohne JavaScript:** klassischer Versand, danach `danke.html`.
-- **Schutz:** Honigtopf-Feld gegen Bots, höchstens 5 Anfragen pro Anschluss
-  in 10 Minuten (IP nur gehasht, verfällt), Pflichtfelder und E-Mail werden
-  auf dem Server erneut geprüft, Header gegen Zeilenumbruch-Einschleusung
-  abgesichert, „Zu räumen“ nur aus der festen Liste.
-- **Antworten:** Die Mail hat `Reply-To` auf den Kunden, „Antworten“ im
-  Postfach geht also direkt an ihn.
-
-**Vor dem Livegang in Hostinger:**
-1. Ein Postfach auf der eigenen Domain anlegen, z. B. `anfrage@revierklar.de`,
-   und genau diese Adresse oben in `anfrage.php` als `ABSENDER` eintragen.
-   Mit einer fremden Absenderadresse landen die Mails bei GMX im Spam.
-2. Einmal selbst eine Testanfrage schicken und prüfen, dass sie ankommt,
-   auch im Spam-Ordner nachsehen.
-
-Getestet wurde die Logik mit PHP 8.5 (WebAssembly, `npx @php-wasm/cli`):
-Pflichtfelder, ungültige E-Mail, fehlende Zustimmung, Honigtopf, Limit,
-Header-Einschleusung, manipulierte Auswahl, gescheiterter Versand. Den
-tatsächlichen Mailversand kann nur der Server bei Hostinger testen.
-
-Lokal kann der Vorschauserver kein PHP. `_review/serve.mjs` hat dafür eine
-Attrappe von `anfrage.php`, die wie das echte Skript antwortet.
+- **Mit JavaScript:** Versand im Hintergrund mit `Accept: application/json`,
+  Knopf zeigt „Wird gesendet …“, danach eine Dankesmeldung an der Stelle des
+  Formulars. Feldfehler von Formspree erscheinen auf Deutsch direkt am Feld.
+- **Ohne JavaScript:** klassischer Versand, danach die Dankeseite von Formspree.
+- **Felder:** `_subject` setzt den Betreff, `_gotcha` ist das Fangfeld gegen
+  Bots, `email` wird von Formspree automatisch als Antwortadresse genutzt.
+- **Datenschutz:** eigener Abschnitt mit Übermittlung in die USA. Im
+  Formspree-Konto muss der Vertrag zur Auftragsverarbeitung (DPA) akzeptiert
+  sein, sonst stimmt der Satz dazu in der Datenschutzerklärung nicht.
+- **Test:** Im lokalen Test wurde `fetch` durch eine Attrappe mit echten
+  Formspree-Antworten ersetzt, damit keine Test-Mails beim Kunden landen.
+  Nach dem Livegang einmal echt absenden und den Eingang prüfen.
 
 ## Knöpfe und Formen
 
@@ -312,7 +299,7 @@ die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
 ## Tablet, Cache, Touch-Schwelle
 
 - **Versionsnummern:** `css/style.css?v=JJJJMMTT` und `js/main.js?v=JJJJMMTT`
-  in allen HTML-Dateien und in `anfrage.php`. Bei jeder Änderung an CSS oder
+  in allen HTML-Dateien. Bei jeder Änderung an CSS oder
   JS das Datum überall hochzählen, sonst mischen Browser neue HTML mit alter
   CSS aus dem Cache. Genau das hat zweimal wie ein kaputter Regler ausgesehen.
 - **Navigation:** Braucht rund 820 px. Unter 896 px (56rem) ist sie
@@ -348,3 +335,22 @@ die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
   (0176 45620735, rechts). Am Desktop steht der Name neben, auf dem Handy unter
   der Nummer. Im Kontaktbereich und im Footer stehen die Namen ebenfalls bei
   den Nummern.
+
+## Rechtliches, Stand Oktober 2026
+
+- **Rechtsform:** RevierKlar NRW GbR, vertreten durch die Gesellschafter
+  P. Trujillo und A. Varli. Die Vornamen müssen vor dem Livegang ausgeschrieben
+  werden.
+- **USt-IdNr.:** beantragt, wird nach Erteilung im Impressum ergänzt.
+- **EU-Plattform zur Online-Streitbeilegung:** abgeschaltet seit Juli 2025,
+  der Hinweis darauf ist entfernt. Die Erklärung zur Verbraucherschlichtung
+  bleibt.
+- **§ 18 Abs. 2 MStV:** entfernt, gilt nur für journalistisch-redaktionelle
+  Angebote.
+- **KI-Visualisierungen:** Hinweis kurz im Footer, unter dem Vergleichsregler
+  und ausführlich im Impressum. Seit August 2026 verlangt die KI-Verordnung
+  (Art. 50) eine Kennzeichnung KI-erzeugter Bilder, die echte Orte zeigen, und
+  ohne Hinweis wäre ein Nachher-Bild als Leistungsnachweis irreführend (UWG).
+  Mit echten Fotos vom Endzustand fällt der Hinweis weg.
+- **Footer:** „© 2026 RevierKlar NRW GbR · Realisiert von Mathew WebAgency“
+  mit Link auf mathew-webagency.de, auf allen Seiten.

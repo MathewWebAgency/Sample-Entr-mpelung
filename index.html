@@ -21,7 +21,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=2026100203">
+<link rel="stylesheet" href="css/style.css?v=2026100403">
 <script>document.documentElement.classList.add("js");</script>
 
 <script type="application/ld+json">
@@ -29,7 +29,8 @@
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": "https://www.revierklar.de/#betrieb",
-  "name": "RevierKlar NRW",
+  "name": "RevierKlar NRW GbR",
+  "legalName": "RevierKlar NRW GbR",
   "alternateName": "REVIERKLAR",
   "description": "Entrümpelung, Haushaltsauflösung, Gewerbeentrümpelung und fachgerechte Entsorgung in Bochum und im Ruhrgebiet.",
   "url": "https://www.revierklar.de/",
@@ -283,13 +284,14 @@
         <li><a href="tel:+4917645620735">0176 45620735<span class="kon-name">A. Varli</span></a></li>
         <li><a href="mailto:revierklar.nrw@gmx.de">revierklar.nrw@gmx.de</a></li>
       </ul>
-      <p class="kon-adr">RevierKlar NRW<br>Westenfelder 4, 44866 Bochum</p>
+      <p class="kon-adr">RevierKlar NRW GbR<br>Westenfelder 4, 44866 Bochum</p>
     </div>
 
-    <form class="kon-form" action="anfrage.php" method="post" novalidate>
+    <form class="kon-form" action="https://formspree.io/f/mwlpgjlr" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Neue Anfrage über revierklar.de">
       <div class="f-topf" aria-hidden="true">
         <label for="f-website">Bitte leer lassen</label>
-        <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        <input id="f-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
       </div>
       <div class="f-row">
         <label for="f-name">Ihr Name</label>
@@ -332,7 +334,6 @@
         <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</span>
       </label>
       <button class="btn btn--solid btn--wide f-send" type="submit">Anfrage senden</button>
-      <p class="f-hint">Wir melden uns am selben Werktag.</p>
       <p class="f-status" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -344,7 +345,7 @@
   <div class="foot-top">
     <div>
       <p class="foot-brand">REVIER<span class="gruen">KLAR</span></p>
-      <p class="foot-adr">RevierKlar NRW<br>Westenfelder 4<br>44866 Bochum</p>
+      <p class="foot-adr">RevierKlar NRW GbR<br>Westenfelder 4<br>44866 Bochum</p>
     </div>
     <nav class="foot-nav" aria-label="Kontakt und Rechtliches">
       <a href="tel:+4917632078800">0176 32078800, P. Trujillo</a>
@@ -354,12 +355,15 @@
       <a href="datenschutz.html">Datenschutz</a>
     </nav>
   </div>
-  <p class="foot-note">Die Vorher-Aufnahmen stammen aus einem echten Auftrag und werden mit Einverständnis der Eigentümer gezeigt. Die Nachher-Ansichten sind Visualisierungen desselben Raums im geräumten Zustand und werden ersetzt, sobald eigene Fotos vom Endzustand vorliegen.</p>
+  <div class="foot-unten">
+    <p class="foot-recht">&copy; 2026 RevierKlar NRW GbR<span class="foot-trenner" aria-hidden="true">·</span><span class="foot-agentur">Realisiert von <a href="https://mathew-webagency.de/" rel="noopener">Mathew WebAgency</a></span></p>
+    <p class="foot-ki">Nachher-Bilder sind Visualisierungen auf Grundlage echter Vorher-Fotos.</p>
+  </div>
 </footer>
 
 <script src="assets/js/gsap.min.js" defer></script>
 <script src="assets/js/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/lenis.min.js" defer></script>
-<script src="js/main.js?v=2026100203" defer></script>
+<script src="js/main.js?v=2026100403" defer></script>
 </body>
 </html>

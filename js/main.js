@@ -195,22 +195,31 @@
 
       if (bad) { status.textContent = "Da fehlt noch eine Angabe."; bad.focus(); return; }
 
-      /* Echter Versand an anfrage.php. Ohne JavaScript schickt der Browser
-         dasselbe Formular klassisch ab und landet auf danke.html. */
+      /* Versand an Formspree. Ohne JavaScript schickt der Browser dasselbe
+         Formular klassisch ab und landet auf der Dankeseite von Formspree. */
       var send = form.querySelector(".f-send");
       var sendLabel = send.textContent;
       send.disabled = true;
       send.textContent = "Wird gesendet …";
       status.textContent = "";
 
+      var MELDUNG = {
+        name: "Das brauchen wir, um Ihnen antworten zu können.",
+        email: "Diese E-Mail-Adresse sieht nicht vollständig aus."
+      };
+
       fetch(form.action, {
         method: "POST",
         body: new FormData(form),
         headers: { "Accept": "application/json" }
       })
-        .then(function (res) { return res.json().catch(function () { return { ok: false }; }); })
-        .then(function (data) {
-          if (data && data.ok) {
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            return { ok: res.ok, data: data || {} };
+          });
+        })
+        .then(function (r) {
+          if (r.ok) {
             var done = document.createElement("div");
             done.className = "f-done";
             done.setAttribute("tabindex", "-1");
@@ -220,24 +229,22 @@
             done.focus();
             return;
           }
-          if (data && data.fehler) {
-            Object.keys(data.fehler).forEach(function (name) {
-              var field = form.elements[name];
-              var row = field && field.closest(".f-row");
-              if (!row) return;
-              row.classList.add("is-bad");
-              var msg = document.createElement("p");
-              msg.className = "f-err";
-              msg.textContent = data.fehler[name];
-              row.appendChild(msg);
-            });
-          }
-          throw new Error((data && data.nachricht) || "");
+          (r.data.errors || []).forEach(function (fe) {
+            var field = fe.field && form.elements[fe.field];
+            var row = field && field.closest && field.closest(".f-row");
+            if (!row || row.classList.contains("is-bad")) return;
+            row.classList.add("is-bad");
+            var msg = document.createElement("p");
+            msg.className = "f-err";
+            msg.textContent = MELDUNG[fe.field] || "Bitte prüfen Sie diese Angabe.";
+            row.appendChild(msg);
+          });
+          throw new Error(form.querySelector(".f-err") ? "Bitte prüfen Sie die markierte Angabe." : "");
         })
         .catch(function (err) {
           send.disabled = false;
           send.textContent = sendLabel;
-          status.textContent = (err && err.message) || "Das hat leider nicht geklappt. Bitte rufen Sie uns an oder versuchen Sie es gleich noch einmal.";
+          status.textContent = (err && err.message) || "Das hat leider nicht geklappt. Bitte rufen Sie uns an oder schreiben Sie direkt an revierklar.nrw@gmx.de.";
         });
     });
   }

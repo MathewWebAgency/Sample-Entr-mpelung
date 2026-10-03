@@ -68,6 +68,8 @@ body {
   font-size: var(--t-body);
   line-height: 1.62;
   hyphens: auto;
+  /* Nur Woerter ab 8 Zeichen trennen: lange Zusammensetzungen ja, "Bo-chum" nein */
+  hyphenate-limit-chars: 8 4 4;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
@@ -378,7 +380,6 @@ html:not(.js) .faq-ico { display: none; }
 .f-check { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: start; font-size: 0.88rem; line-height: 1.5; color: var(--beton-hell); cursor: pointer; }
 .f-check input { width: 24px; height: 24px; flex: none; margin-top: 0.05em; accent-color: var(--revier); }
 .f-check a { text-decoration: underline; text-underline-offset: 3px; }
-.f-hint { font-size: 0.85rem; color: var(--beton-hell); max-width: 46ch; }
 .f-send:disabled { opacity: 0.7; cursor: progress; transform: none; }
 /* Honigtopf fuer Bots: fuer Menschen unsichtbar und nicht erreichbar */
 .f-topf { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -396,16 +397,29 @@ html:not(.js) .faq-ico { display: none; }
 
 .foot { background: var(--kohle-2); color: var(--beton-hell); padding: clamp(2.5rem, 5vw, 4rem) var(--gutter) 2.5rem; }
 .foot-top { max-width: var(--maxw); margin: 0 auto; display: flex; flex-wrap: wrap; gap: 2rem clamp(2rem, 6vw, 5rem); align-items: flex-start; }
-.foot-brand { font-family: var(--f-display); font-weight: 800; font-size: 1.6rem; letter-spacing: -0.035em; text-transform: uppercase; color: var(--klar); }
+/* .foot p setzt 430, deshalb hier mit hoeherer Spezifitaet */
+.foot .foot-brand { font-family: var(--f-display); font-weight: 800; font-size: 1.6rem; letter-spacing: -0.035em; text-transform: uppercase; color: var(--klar); }
 .foot-brand .gruen { color: var(--revier-hell); }
 .foot-adr { margin-top: 0.6rem; font-size: 0.94rem; line-height: 1.55; }
 .foot-nav { display: grid; gap: 0.1rem; margin-left: auto; font-size: 0.94rem; }
 .foot-nav a { width: fit-content; min-height: 44px; display: flex; align-items: center; }
 .foot-nav a:hover { color: var(--revier-hell); }
-.foot-note { max-width: var(--maxw); margin: clamp(2rem, 4vw, 3rem) auto 0; padding-top: 1.4rem; border-top: 1px solid var(--linie-hell); font-size: 0.82rem; line-height: 1.6; max-width: 72ch; }
+.foot-unten { max-width: var(--maxw); margin: clamp(2rem, 4vw, 3rem) auto 0; padding-top: 1.4rem; border-top: 1px solid var(--linie-hell);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem 2rem; font-size: 0.85rem; line-height: 1.6; }
+.foot-recht a { color: var(--klar); text-decoration: underline; text-decoration-color: var(--linie-hell); text-underline-offset: 3px; transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out); }
+.foot-recht a:hover { color: var(--revier-hell); text-decoration-color: currentColor; }
+.foot-trenner { margin: 0 0.55em; }
+/* Namen, Marken und Telefonnummern brechen nie mitten durch */
+a[href^="tel:"], .foot-agentur { white-space: nowrap; }
+.foot-recht, .foot-agentur, .kon-name, .tel-name { hyphens: none; }
+.foot-ki { max-width: 48ch; }
+.foot-unten:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 
 /* ---------- Rechtsseiten ---------- */
 
+/* Kurze Seiten: Footer sitzt am unteren Rand statt in der Mitte zu schweben */
+body:has(> main.legal) { min-height: 100svh; display: flex; flex-direction: column; }
+body:has(> main.legal) > main.legal { flex: 1 0 auto; }
 .legal { padding: calc(var(--head-h) + clamp(3rem, 7vw, 5rem)) var(--gutter) var(--pad-y); }
 .legal-in { max-width: 46rem; margin: 0 auto; }
 .legal h1 { font-family: var(--f-display); font-weight: 800; font-size: var(--t-h2); line-height: 1.04; letter-spacing: -0.035em; text-transform: uppercase; margin-bottom: 2rem; }
@@ -445,6 +459,9 @@ html:not(.js) .faq-ico { display: none; }
 }
 @media (max-width: 47.99rem) {
   .hero-logo { width: 100%; }
+  .foot-nav { margin-left: 0; }
+  .foot-trenner { display: none; }
+  .foot-agentur { display: block; }
   .hero-cta { margin-left: 0; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
   .hero-cta .btn--solid { grid-column: 1 / -1; }
   .btn--tel { padding: 0.55em 0.6em; font-size: 0.94rem; gap: 0.45em; }
