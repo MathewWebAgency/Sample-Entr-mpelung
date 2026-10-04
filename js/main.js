@@ -17,9 +17,25 @@
   var wrapB = document.querySelector(".hero-b");
   var imgB = document.querySelector(".hero-img--b");
   var seam = document.querySelector(".hero-seam");
+  var kiWrap = document.querySelector(".hero-ki");
+  var kiIn = document.querySelector(".hero-ki-in");
   var stageW = 0;
 
-  function measureStage() { stageW = stage ? stage.getBoundingClientRect().width : 0; }
+  /* Auf dem Handy ist unter den Knoepfen kein Platz fuer den KI-Hinweis.
+     Dort steht er oben links, knapp unter dem grossen Logo. Gemessen per
+     offset*, das von den Animationen (transform) unberuehrt bleibt. */
+  var kiTag = document.querySelector(".hero-ki .ki-tag");
+  var kiLogo = document.querySelector(".hero-logo");
+  function placeKi() {
+    if (!kiTag || !kiLogo || !stage) return;
+    if (window.innerWidth >= 768) { kiTag.style.top = ""; kiTag.style.bottom = ""; return; }
+    var y = 0, el = kiLogo;
+    while (el && el !== stage) { y += el.offsetTop; el = el.offsetParent; }
+    kiTag.style.top = Math.round(y + kiLogo.offsetHeight + 12) + "px";
+    kiTag.style.bottom = "auto";
+  }
+
+  function measureStage() { stageW = stage ? stage.getBoundingClientRect().width : 0; placeKi(); }
 
   /* Kante, Rahmen und Bild bewegen sich nur per transform. Kein clip-path,
      kein left: Pro Frame wird nichts neu gezeichnet, nur verschoben. */
@@ -27,6 +43,8 @@
     var off = ((v - 1) * 100).toFixed(3);
     if (wrapB) wrapB.style.transform = "translate3d(" + off + "%,0,0)";
     if (imgB) imgB.style.transform = "translate3d(" + (-off) + "%,0,0)";
+    if (kiWrap) kiWrap.style.transform = "translate3d(" + off + "%,0,0)";
+    if (kiIn) kiIn.style.transform = "translate3d(" + (-off) + "%,0,0)";
     if (seam) seam.style.transform = "translate3d(" + (v * stageW).toFixed(2) + "px,0,0)";
   }
 
@@ -232,7 +250,7 @@
 
       var MELDUNG = {
         name: "Das brauchen wir, um Ihnen antworten zu können.",
-        email: "Diese E-Mail-Adresse sieht nicht vollständig aus."
+        email: "Diese <span class=\"nw\">E-Mail-Adresse</span> sieht nicht vollständig aus."
       };
 
       fetch(form.action, {
@@ -263,7 +281,8 @@
             row.classList.add("is-bad");
             var msg = document.createElement("p");
             msg.className = "f-err";
-            msg.textContent = MELDUNG[fe.field] || "Bitte prüfen Sie diese Angabe.";
+            // Feste Texte aus MELDUNG, nichts vom Server
+            msg.innerHTML = Object.prototype.hasOwnProperty.call(MELDUNG, fe.field) ? MELDUNG[fe.field] : "Bitte prüfen Sie diese Angabe.";
             row.appendChild(msg);
           });
           throw new Error(form.querySelector(".f-err") ? "Bitte prüfen Sie die markierte Angabe." : "");

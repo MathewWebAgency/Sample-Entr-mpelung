@@ -87,9 +87,8 @@ body {
   font-weight: 400;
   font-size: var(--t-body);
   line-height: 1.62;
-  hyphens: auto;
-  /* Nur Woerter ab 8 Zeichen trennen: lange Zusammensetzungen ja, "Bo-chum" nein */
-  hyphenate-limit-chars: 8 4 4;
+  /* Keine Silbentrennung, nirgends: Woerter bleiben ganz. */
+  hyphens: manual;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
@@ -219,10 +218,22 @@ input, select, textarea { font: inherit; color: inherit; }
     linear-gradient(to right, rgba(16,18,17,0.5) 0%, rgba(16,18,17,0.14) 36%, transparent 60%);
 }
 
-/* Pflichthinweis (KI-VO Art. 50): sichtbar, solange das Bild sichtbar ist,
-   aber leise. Unten rechts, unter den Knoepfen. */
-.hero-ki { position: absolute; z-index: 3; right: var(--gutter); bottom: 0.45rem; margin: 0;
-  font-size: 0.72rem; line-height: 1.3; color: rgba(244,245,242,0.78); text-shadow: 0 1px 6px rgba(16,18,17,0.6); pointer-events: none; }
+/* Pflichthinweis (KI-VO Art. 50) direkt auf dem Nachher-Bild. Im Hero
+   liegt er ueber dem Verlauf in einer eigenen Ebene, die genau wie
+   .hero-b mitfaehrt: Er kommt mit der Kante ins Bild und steht nie auf dem
+   Vorher-Foto. Im Regler liegt er zwischen Nachher-Bild und Vorher-Rahmen. */
+.hero-ki { position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; transform: translate3d(-100%, 0, 0); will-change: transform; }
+.hero-ki-in { position: absolute; inset: 0; transform: translate3d(100%, 0, 0); will-change: transform; }
+/* Unten links: Das Nachher-Bild kommt von links, der Hinweis ist also vom
+   ersten Moment an dabei, in dem man es sieht. */
+.ki-tag {
+  position: absolute; left: var(--gutter); bottom: 0.6rem; margin: 0;
+  padding: 0.3em 0.75em; border-radius: 999px;
+  background: rgba(16,18,17,0.62); color: rgba(244,245,242,0.92);
+  font-size: 0.72rem; font-weight: 500; line-height: 1.3; letter-spacing: 0.01em;
+  white-space: nowrap; pointer-events: none;
+}
+.ki-tag--ba { left: auto; right: 0.75rem; bottom: 0.75rem; }
 /* Grosses Logo auf einer Tafel in Headerfarbe. Die Tafel ist die spaetere
    Headerleiste im Kleinen, deshalb dieselbe Farbe und eckig wie der Header. */
 .hero-top {
@@ -371,6 +382,8 @@ input, select, textarea { font: inherit; color: inherit; }
 html:not(.js) .hero-b { transform: translate3d(-50%, 0, 0); }
 html:not(.js) .hero-img--b { transform: translate3d(50%, 0, 0); }
 html:not(.js) .hero-seam { opacity: 1; left: 50%; transform: none; }
+html:not(.js) .hero-ki { transform: translate3d(-50%, 0, 0); }
+html:not(.js) .hero-ki-in { transform: translate3d(50%, 0, 0); }
 html:not(.js) .faq-a { grid-template-rows: 1fr; }
 html:not(.js) .faq-a-in p { opacity: 1; transform: none; }
 html:not(.js) .faq-ico { display: none; }
@@ -412,7 +425,7 @@ html:not(.js) .faq-ico { display: none; }
 .f-topf { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .f-done { padding: clamp(1.6rem, 4vw, 2.4rem); border: 1px solid var(--linie-hell); border-radius: var(--r-feld); }
 .f-done:focus { outline: none; }
-.f-done h3 { font-family: var(--f-display); font-weight: 800; font-size: var(--t-h3); letter-spacing: -0.028em; text-transform: uppercase; color: var(--revier-hell); margin-bottom: 0.6rem; }
+.f-done h3 { text-wrap: balance; font-family: var(--f-display); font-weight: 800; font-size: var(--t-h3); letter-spacing: -0.028em; text-transform: uppercase; color: var(--revier-hell); margin-bottom: 0.6rem; }
 .f-done p { color: var(--klar); }
 .f-status { font-size: 0.95rem; font-weight: 600; color: var(--revier-hell); min-height: 1.5em; }
 .f-row.is-bad input, .f-row.is-bad select, .f-row.is-bad textarea { border-color: #E4603A; }
@@ -439,6 +452,8 @@ html:not(.js) .faq-ico { display: none; }
 /* Namen, Marken und Telefonnummern brechen nie mitten durch */
 a[href^="tel:"], .foot-agentur { white-space: nowrap; }
 .foot-recht, .foot-agentur, .kon-name, .tel-name { hyphens: none; }
+/* Zusammengesetzte Woerter mit Bindestrich bleiben in einer Zeile */
+.nw { white-space: nowrap; }
 .foot-ki { max-width: 48ch; }
 .foot-unten:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 
@@ -449,7 +464,8 @@ body:has(> main.legal) { min-height: 100svh; display: flex; flex-direction: colu
 body:has(> main.legal) > main.legal { flex: 1 0 auto; }
 .legal { padding: calc(var(--head-h) + clamp(3rem, 7vw, 5rem)) var(--gutter) var(--pad-y); }
 .legal-in { max-width: 46rem; margin: 0 auto; }
-.legal h1 { font-family: var(--f-display); font-weight: 800; font-size: var(--t-h2); line-height: 1.04; letter-spacing: -0.035em; text-transform: uppercase; margin-bottom: 2rem; }
+/* Das laengste Wort (DATENSCHUTZERKLAERUNG, knapp 12 em) passt immer ganz in die Zeile */
+.legal h1 { font-family: var(--f-display); font-weight: 800; font-size: min(var(--t-h2), calc((100vw - 2 * var(--gutter)) / 12.4)); line-height: 1.04; letter-spacing: -0.035em; text-transform: uppercase; margin-bottom: 2rem; }
 .legal h2 { font-family: var(--f-display); font-weight: 700; font-size: var(--t-h3); letter-spacing: -0.025em; margin: 2.4rem 0 0.7rem; }
 .legal p, .legal ul { color: var(--beton); max-width: 66ch; }
 .legal p + p { margin-top: 0.85rem; }
@@ -506,6 +522,8 @@ body:has(> main.legal) > main.legal { flex: 1 0 auto; }
 /* Sehr schmale Handys: die zwei Nummern passen nicht nebeneinander */
 @media (max-width: 22.49rem) {
   .hero-cta { grid-template-columns: 1fr; }
+  /* Lange Woerter wie UEBERRASCHUNGEN muessen ganz in eine Zeile passen */
+  :root { --t-h2: 1.8rem; }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -520,6 +538,8 @@ body:has(> main.legal) > main.legal { flex: 1 0 auto; }
 .static-mode .hero-b { transform: translate3d(-50%, 0, 0); }
 .static-mode .hero-img--b { transform: translate3d(50%, 0, 0); }
 .static-mode .hero-seam { opacity: 1; left: 50%; transform: none; }
+.static-mode .hero-ki { transform: translate3d(-50%, 0, 0); }
+.static-mode .hero-ki-in { transform: translate3d(50%, 0, 0); }
 .static-mode [data-reveal], .static-mode [data-step], .static-mode [data-line] > * { opacity: 1 !important; transform: none !important; }
 .static-mode .abl-bar { height: 100%; transform: none !important; }
 .static-mode .abl-step::before { border-color: var(--revier); background: var(--revier); }
