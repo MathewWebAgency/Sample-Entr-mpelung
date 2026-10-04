@@ -228,7 +228,7 @@ input, select, textarea { font: inherit; color: inherit; }
 .hero-echt { position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; will-change: transform; }
 .hero-echt-in { position: absolute; inset: 0; will-change: transform; }
 .hero-tag {
-  position: absolute; right: var(--gutter); bottom: 0.5rem; margin: 0;
+  position: absolute; right: var(--gutter); bottom: clamp(0.75rem, 2.2vh, 1.5rem); margin: 0;
   font-size: clamp(0.72rem, 0.55rem + 0.36vw, 0.92rem); font-weight: 500; line-height: 1.2; letter-spacing: 0.01em;
   color: rgba(244,245,242,0.85); text-shadow: 0 1px 4px rgba(16,18,17,0.75);
   white-space: nowrap; pointer-events: none;
@@ -592,6 +592,7 @@ body:has(> main.legal) > main.legal { flex: 1 0 auto; }
 .static-mode .hero-ki-in { transform: translate3d(50%, 0, 0); }
 .static-mode .hero-echt { transform: translate3d(50%, 0, 0); }
 .static-mode .hero-echt-in { transform: translate3d(-50%, 0, 0); }
+.static-mode .hero-ki .hero-tag { right: auto; left: var(--gutter); }
 .static-mode [data-reveal], .static-mode [data-step], .static-mode [data-line] > * { opacity: 1 !important; transform: none !important; }
 .static-mode .abl-bar { height: 100%; transform: none !important; }
 .static-mode .abl-step::before { border-color: var(--revier); background: var(--revier); }

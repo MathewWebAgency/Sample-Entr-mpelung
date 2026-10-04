@@ -23,8 +23,8 @@
   var echtIn = document.querySelector(".hero-echt-in");
   var stageW = 0;
 
-  /* Die Bildhinweise stehen klein unter der rechten Telefonnummer, rechts
-     buendig mit dem Knopf. Gemessen per offset*, das von den Animationen
+  /* Am Handy stehen die Bildhinweise klein unter der rechten Telefonnummer,
+     rechtsbuendig mit dem Knopf (unten in der Ecke ist dort kein Platz). Gemessen per offset*, das von den Animationen
      (transform) unberuehrt bleibt. Im statischen Modus teilt die Kante das
      Bild in der Mitte: Dann steht "KI-Visualisierung" links unter dem ersten
      Knopf, auf der Nachher-Haelfte. */
@@ -39,6 +39,11 @@
   }
   function placeKi() {
     if (!stage || !kiTag || !echtTag || !telBtns.length) return;
+    // Tablet und Desktop: unten rechts in der Ecke des Bildes (Lage aus dem CSS)
+    if (window.innerWidth >= 768) {
+      [kiTag, echtTag].forEach(function (t) { t.style.top = t.style.bottom = t.style.right = t.style.left = ""; });
+      return;
+    }
     var btn = telBtns[telBtns.length - 1];
     var p = posIn(btn);
     var top = Math.round(p.y + btn.offsetHeight + Math.max(6, btn.offsetHeight * 0.16)) + "px";
