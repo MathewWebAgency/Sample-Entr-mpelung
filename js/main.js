@@ -23,22 +23,35 @@
   var echtIn = document.querySelector(".hero-echt-in");
   var stageW = 0;
 
-  /* Auf dem Handy ist unter den Knoepfen kein Platz fuer den KI-Hinweis.
-     Dort steht er oben links, knapp unter dem grossen Logo. Gemessen per
-     offset*, das von den Animationen (transform) unberuehrt bleibt. */
-  var kiTags = document.querySelectorAll(".hero-ki .ki-tag, .hero-echt .ki-tag");
-  var kiLogo = document.querySelector(".hero-logo");
-  function placeKi() {
-    if (!kiLogo || !stage) return;
-    var top = "", bottom = "";
-    if (window.innerWidth < 768) {
-      var y = 0, el = kiLogo;
-      while (el && el !== stage) { y += el.offsetTop; el = el.offsetParent; }
-      top = Math.round(y + kiLogo.offsetHeight + 12) + "px";
-      bottom = "auto";
-    }
-    kiTags.forEach(function (t) { t.style.top = top; t.style.bottom = bottom; });
+  /* Die Bildhinweise stehen klein unter der rechten Telefonnummer, rechts
+     buendig mit dem Knopf. Gemessen per offset*, das von den Animationen
+     (transform) unberuehrt bleibt. Im statischen Modus teilt die Kante das
+     Bild in der Mitte: Dann steht "KI-Visualisierung" links unter dem ersten
+     Knopf, auf der Nachher-Haelfte. */
+  var kiTag = document.querySelector(".hero-ki .hero-tag");
+  var echtTag = document.querySelector(".hero-echt .hero-tag");
+  var telBtns = document.querySelectorAll(".hero-cta .btn--tel");
+  var firstBtn = document.querySelector(".hero-cta .btn");
+  function posIn(el) {
+    var x = 0, y = 0;
+    while (el && el !== stage) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; }
+    return { x: x, y: y };
   }
+  function placeKi() {
+    if (!stage || !kiTag || !echtTag || !telBtns.length) return;
+    var btn = telBtns[telBtns.length - 1];
+    var p = posIn(btn);
+    var top = Math.round(p.y + btn.offsetHeight + 6) + "px";
+    var right = Math.round(stage.clientWidth - (p.x + btn.offsetWidth)) + "px";
+    [kiTag, echtTag].forEach(function (t) { t.style.top = top; t.style.bottom = "auto"; t.style.right = right; t.style.left = "auto"; });
+    if (STATIC && firstBtn) {
+      kiTag.style.right = "auto"; kiTag.style.left = Math.round(posIn(firstBtn).x) + "px";
+      // Liegt der Knopf auf der linken Haelfte (Tablet), rueckt "Echtes Foto" an den rechten Rand
+      if (p.x + btn.offsetWidth - echtTag.offsetWidth < stage.clientWidth / 2) echtTag.style.right = "";
+    }
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeKi);
+  window.addEventListener("load", placeKi);
 
   function measureStage() { stageW = stage ? stage.getBoundingClientRect().width : 0; placeKi(); }
 

@@ -218,29 +218,31 @@ input, select, textarea { font: inherit; color: inherit; }
     linear-gradient(to right, rgba(16,18,17,0.5) 0%, rgba(16,18,17,0.14) 36%, transparent 60%);
 }
 
-/* Pflichthinweis (KI-VO Art. 50) direkt auf dem Nachher-Bild. Im Hero
-   liegt er ueber dem Verlauf in einer eigenen Ebene, die genau wie
-   .hero-b mitfaehrt: Er kommt mit der Kante ins Bild und steht nie auf dem
-   Vorher-Foto. Im Regler liegt er zwischen Nachher-Bild und Vorher-Rahmen. */
+/* Pflichthinweise (KI-VO Art. 50) direkt am Bild. Im Hero liegen sie in
+   zwei eigenen Ebenen ueber dem Verlauf, die mit der Kante fahren:
+   "Echtes Foto" ist nur zu sehen, wo das Vorher-Foto steht,
+   "KI-Visualisierung" nur, wo das Nachher-Bild steht. Beide sitzen klein
+   unter der rechten Telefonnummer (Lage per JS gemessen, placeKi). */
 .hero-ki { position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; transform: translate3d(-100%, 0, 0); will-change: transform; }
 .hero-ki-in { position: absolute; inset: 0; transform: translate3d(100%, 0, 0); will-change: transform; }
-/* Unten links: Das Nachher-Bild kommt von links, der Hinweis ist also vom
-   ersten Moment an dabei, in dem man es sieht. */
+.hero-echt { position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; will-change: transform; }
+.hero-echt-in { position: absolute; inset: 0; will-change: transform; }
+.hero-tag {
+  position: absolute; right: var(--gutter); bottom: 0.5rem; margin: 0;
+  font-size: 0.72rem; font-weight: 500; line-height: 1.2; letter-spacing: 0.01em;
+  color: rgba(244,245,242,0.85); text-shadow: 0 1px 4px rgba(16,18,17,0.75);
+  white-space: nowrap; pointer-events: none;
+}
+/* Im Regler als kleine Plakette in den unteren Ecken, der Griff sitzt mittig */
 .ki-tag {
-  position: absolute; left: var(--gutter); bottom: 0.6rem; margin: 0;
+  position: absolute; right: 0.75rem; bottom: 0.75rem; margin: 0;
   padding: 0.3em 0.75em; border-radius: 999px;
   background: rgba(16,18,17,0.62); color: rgba(244,245,242,0.92);
   font-size: 0.72rem; font-weight: 500; line-height: 1.3; letter-spacing: 0.01em;
   white-space: nowrap; pointer-events: none;
 }
-.ki-tag--ba { left: auto; right: 0.75rem; bottom: 0.75rem; }
-/* "Echtes Foto" auf dem Vorher-Bild: Die Ebene schrumpft von links mit der
-   Kante, der Hinweis verschwindet also genau dort, wo das Nachher-Bild
-   kommt, und an derselben Stelle erscheint "KI-Visualisierung". */
-.hero-echt { position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; will-change: transform; }
-.hero-echt-in { position: absolute; inset: 0; will-change: transform; }
-.ba-top-in { position: absolute; inset: 0; pointer-events: none; transform: translate3d(50%, 0, 0); will-change: transform; }
 .ki-tag--vorher { left: 0.75rem; right: auto; }
+.ba-top-in { position: absolute; inset: 0; pointer-events: none; transform: translate3d(50%, 0, 0); will-change: transform; }
 @media (max-width: 47.99rem) { .ki-tag { font-size: 0.75rem; } }
 /* Grosses Logo auf einer Tafel in Headerfarbe. Die Tafel ist die spaetere
    Headerleiste im Kleinen, deshalb dieselbe Farbe und eckig wie der Header. */
@@ -321,7 +323,6 @@ input, select, textarea { font: inherit; color: inherit; }
 .ba-frame:has(.ba-range:focus-visible) .ba-grip { outline: 3px solid var(--revier-hell); outline-offset: 4px; }
 .ba-ends { max-width: 720px; margin: 0.9rem auto 0; display: flex; justify-content: space-between; font-weight: 600; color: var(--klar); }
 .ba-ends span:last-child { color: var(--revier-hell); }
-.ba-cap { max-width: 720px; margin: 1.4rem auto 0; font-size: 0.95rem; color: var(--beton-hell); }
 
 /* ---------- Ablauf ---------- */
 
@@ -417,7 +418,7 @@ html:not(.js) .hero-ki { transform: translate3d(-50%, 0, 0); }
 html:not(.js) .hero-ki-in { transform: translate3d(50%, 0, 0); }
 html:not(.js) .hero-echt { transform: translate3d(50%, 0, 0); }
 html:not(.js) .hero-echt-in { transform: translate3d(-50%, 0, 0); }
-html:not(.js) .hero-echt .ki-tag { left: auto; right: var(--gutter); }
+html:not(.js) .hero-ki .hero-tag { right: auto; left: var(--gutter); }
 html:not(.js) .faq-a { grid-template-rows: 1fr; }
 html:not(.js) .kon-form { display: none; }
 html:not(.js) .faq-a-in p { opacity: 1; transform: none; }
@@ -587,7 +588,6 @@ body:has(> main.legal) > main.legal { flex: 1 0 auto; }
 .static-mode .hero-ki-in { transform: translate3d(50%, 0, 0); }
 .static-mode .hero-echt { transform: translate3d(50%, 0, 0); }
 .static-mode .hero-echt-in { transform: translate3d(-50%, 0, 0); }
-.static-mode .hero-echt .ki-tag { left: auto; right: var(--gutter); }
 .static-mode [data-reveal], .static-mode [data-step], .static-mode [data-line] > * { opacity: 1 !important; transform: none !important; }
 .static-mode .abl-bar { height: 100%; transform: none !important; }
 .static-mode .abl-step::before { border-color: var(--revier); background: var(--revier); }

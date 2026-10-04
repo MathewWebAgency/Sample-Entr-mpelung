@@ -30,7 +30,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=2026100416">
+<link rel="stylesheet" href="css/style.css?v=2026100417">
 <script>document.documentElement.classList.add("js");</script>
 
 <script type="application/ld+json">
@@ -288,8 +288,8 @@
     <!-- Kennzeichnung direkt am Bild: "Echtes Foto" liegt auf dem Vorher-Foto,
          "KI-Visualisierung" auf dem Nachher-Bild. Beide Ebenen fahren mit der
          Kante, jeder Hinweis ist nur dort zu sehen, wo sein Bild zu sehen ist. -->
-    <div class="hero-echt"><div class="hero-echt-in"><p class="ki-tag">Echtes Foto</p></div></div>
-    <div class="hero-ki"><div class="hero-ki-in"><p class="ki-tag"><span class="nw">KI-Visualisierung</span></p></div></div>
+    <div class="hero-echt"><div class="hero-echt-in"><p class="hero-tag">Echtes Foto</p></div></div>
+    <div class="hero-ki"><div class="hero-ki-in"><p class="hero-tag"><span class="nw">KI-Visualisierung</span></p></div></div>
 
     <div class="hero-copy">
       <p class="hero-title">Wir schaffen<br>Platz im <span class="gruen">Revier.</span></p>
@@ -331,16 +331,15 @@
     <figure class="ba" data-ba>
       <div class="ba-frame">
         <picture><source type="image/avif" srcset="assets/img/kellerentruempelung-bochum-nachher-600.avif 600w, assets/img/kellerentruempelung-bochum-nachher-900.avif 900w, assets/img/kellerentruempelung-bochum-nachher-1200.avif 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><source type="image/webp" srcset="assets/img/kellerentruempelung-bochum-nachher-600.webp 600w, assets/img/kellerentruempelung-bochum-nachher-900.webp 900w, assets/img/kellerentruempelung-bochum-nachher-1200.webp 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><img class="ba-img" src="assets/img/kellerentruempelung-bochum-nachher-900.jpg" srcset="assets/img/kellerentruempelung-bochum-nachher-600.jpg 600w, assets/img/kellerentruempelung-bochum-nachher-900.jpg 900w, assets/img/kellerentruempelung-bochum-nachher-1200.jpg 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)" alt="KI-Visualisierung: derselbe Kellerraum nach der Räumung, das Regal steht leer, der Boden ist gefegt" width="1200" height="1600" loading="lazy" decoding="async"></picture>
-        <p class="ki-tag ki-tag--ba"><span class="nw">KI-Visualisierung</span></p>
+        <p class="ki-tag"><span class="nw">KI-Visualisierung</span></p>
         <div class="ba-top">
           <picture><source type="image/avif" srcset="assets/img/kellerentruempelung-bochum-vorher-600.avif 600w, assets/img/kellerentruempelung-bochum-vorher-900.avif 900w, assets/img/kellerentruempelung-bochum-vorher-1200.avif 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><source type="image/webp" srcset="assets/img/kellerentruempelung-bochum-vorher-600.webp 600w, assets/img/kellerentruempelung-bochum-vorher-900.webp 900w, assets/img/kellerentruempelung-bochum-vorher-1200.webp 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><img class="ba-img ba-img--top" src="assets/img/kellerentruempelung-bochum-vorher-900.jpg" srcset="assets/img/kellerentruempelung-bochum-vorher-600.jpg 600w, assets/img/kellerentruempelung-bochum-vorher-900.jpg 900w, assets/img/kellerentruempelung-bochum-vorher-1200.jpg 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)" alt="Echtes Foto: Kellerraum vor der Räumung, Regal und Boden voll mit Säcken, Kartons und Hausrat" width="1200" height="1600" loading="lazy" decoding="async"></picture>
-          <div class="ba-top-in"><p class="ki-tag ki-tag--ba ki-tag--vorher">Echtes Foto</p></div>
+          <div class="ba-top-in"><p class="ki-tag ki-tag--vorher">Echtes Foto</p></div>
         </div>
         <span class="ba-seam" aria-hidden="true"><span class="ba-grip"></span></span>
         <input class="ba-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Vergleich Keller: Regler nach links zeigt vorher, nach rechts zeigt nachher">
       </div>
       <p class="ba-ends" aria-hidden="true"><span>Vorher</span><span>Nachher</span></p>
-      <figcaption class="ba-cap">Die <span class="nw">Vorher-Aufnahmen</span> stammen aus einem echten Auftrag und werden mit Einverständnis der Eigentümer gezeigt. Die <span class="nw">Nachher-Ansichten</span> sind <span class="nw">KI-Visualisierungen</span> desselben Raumes im geräumten Zustand und werden durch eigene Fotos ersetzt, sobald sie vorliegen.</figcaption>
     </figure>
   </div>
 </section>
@@ -568,7 +567,7 @@
 <script src="assets/js/gsap.min.js" defer></script>
 <script src="assets/js/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/lenis.min.js" defer></script>
-<script src="js/main.js?v=2026100416" defer></script>
+<script src="js/main.js?v=2026100417" defer></script>
 <script>document.querySelectorAll("[data-jahr]").forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>
