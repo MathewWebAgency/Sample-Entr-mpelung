@@ -219,6 +219,10 @@ input, select, textarea { font: inherit; color: inherit; }
     linear-gradient(to right, rgba(16,18,17,0.5) 0%, rgba(16,18,17,0.14) 36%, transparent 60%);
 }
 
+/* Pflichthinweis (KI-VO Art. 50): sichtbar, solange das Bild sichtbar ist,
+   aber leise. Unten rechts, unter den Knoepfen. */
+.hero-ki { position: absolute; z-index: 3; right: var(--gutter); bottom: 0.45rem; margin: 0;
+  font-size: 0.72rem; line-height: 1.3; color: rgba(244,245,242,0.78); text-shadow: 0 1px 6px rgba(16,18,17,0.6); pointer-events: none; }
 /* Grosses Logo auf einer Tafel in Headerfarbe. Die Tafel ist die spaetere
    Headerleiste im Kleinen, deshalb dieselbe Farbe und eckig wie der Header. */
 .hero-top {

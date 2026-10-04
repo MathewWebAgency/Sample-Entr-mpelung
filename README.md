@@ -135,7 +135,7 @@ verworfener Versuch, die Wortmarke zu säubern.
 ## Formular
 
 Es gibt kein Backend. Das Formular baut eine `mailto`-Nachricht an
-revierklar.nrw@gmx.de, öffnet das Mailprogramm des Besuchers und sagt genau das auch
+info@revierklar.de, öffnet das Mailprogramm des Besuchers und sagt genau das auch
 dazu. Für den Livegang genügt es, `action` auf einen Formulardienst zu setzen.
 
 ## Vor dem Livegang zu ergänzen

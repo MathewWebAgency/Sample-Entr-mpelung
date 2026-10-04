@@ -271,7 +271,7 @@
         .catch(function (err) {
           send.disabled = false;
           send.textContent = sendLabel;
-          status.textContent = (err && err.message) || "Das hat leider nicht geklappt. Bitte rufen Sie uns an oder schreiben Sie direkt an revierklar.nrw@gmx.de.";
+          status.textContent = (err && err.message) || "Das hat leider nicht geklappt. Bitte rufen Sie uns an oder schreiben Sie direkt an info@revierklar.de.";
         });
     });
   }
