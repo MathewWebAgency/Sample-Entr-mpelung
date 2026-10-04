@@ -1,21 +1,31 @@
 # ---------------------------------------------------------------
 # REVIERKLAR: Wurzel des Repositorys = Wurzel der Website = public_html.
 # Die Seite liegt direkt oben (kein Unterordner), deshalb keine
-# Umschreibung. Diese Datei sperrt nur, was nicht oeffentlich sein soll.
+# Umschreibung in einen Unterordner.
+# Kanonische Adresse: https://revierklar.de/ (ohne www).
 # ---------------------------------------------------------------
 
 Options -Indexes
 ErrorDocument 404 /404.html
+AddDefaultCharset utf-8
+AddType application/manifest+json .webmanifest
+AddType image/webp .webp
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # HTTPS erzwingen
-  RewriteCond %{HTTPS} !=on
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-
   # Zertifikatspruefung von Hostinger nicht anfassen
   RewriteRule ^\.well-known/ - [L]
+
+  # Eine einzige Adresse: https und ohne www, in einem Schritt
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+  # /index.html auf die Startseite, damit es keine zweite Adresse gibt
+  RewriteCond %{THE_REQUEST} \s/index\.html[?\s] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
 
   # Interne Dateien: Doku, Konzept, Git- und Editor-Ordner
   RewriteRule (^|/)\.(git|gitignore|claude|agents|impeccable)(/|$) - [R=404,L]
@@ -25,3 +35,41 @@ ErrorDocument 404 /404.html
 <FilesMatch "\.(md|gitignore|lock)$">
   Require all denied
 </FilesMatch>
+
+# ---------- Komprimierung ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/ld+json application/xml application/manifest+json image/svg+xml
+</IfModule>
+
+# ---------- Cache ----------
+# CSS und main.js tragen ?v=JJJJMMTTnn und duerfen lange liegen.
+# Bilder, Schriften und Bibliotheken aendern sich selten.
+# HTML immer frisch pruefen, damit neue Versionen sofort ankommen.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 week"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/x-icon "access plus 6 months"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # ---------- Sicherheit ----------
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+</IfModule>

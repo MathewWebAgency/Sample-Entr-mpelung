@@ -256,9 +256,10 @@ stellt die Anfrage per E-Mail zu. `anfrage.php` und `danke.html` sind entfernt.
 - **Ohne JavaScript:** klassischer Versand, danach die Dankeseite von Formspree.
 - **Felder:** `_subject` setzt den Betreff, `_gotcha` ist das Fangfeld gegen
   Bots, `email` wird von Formspree automatisch als Antwortadresse genutzt.
-- **Datenschutz:** eigener Abschnitt mit Übermittlung in die USA. Im
-  Formspree-Konto muss der Vertrag zur Auftragsverarbeitung (DPA) akzeptiert
-  sein, sonst stimmt der Satz dazu in der Datenschutzerklärung nicht.
+- **Betrieb:** Das Formular liegt im Formspree-Konto von Mathew WebAgency, die
+  Anfragen werden an Pedro Trujillo und Adem Varli weitergeleitet. So steht es
+  auch in der Datenschutzerklärung. Zwischen RevierKlar und Mathew WebAgency
+  sollte dafür ein Vertrag zur Auftragsverarbeitung bestehen.
 - **Test:** Im lokalen Test wurde `fetch` durch eine Attrappe mit echten
   Formspree-Antworten ersetzt, damit keine Test-Mails beim Kunden landen.
   Nach dem Livegang einmal echt absenden und den Eingang prüfen.
@@ -339,8 +340,7 @@ die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
 ## Rechtliches, Stand Oktober 2026
 
 - **Rechtsform:** RevierKlar NRW GbR, vertreten durch die Gesellschafter
-  P. Trujillo und A. Varli. Die Vornamen müssen vor dem Livegang ausgeschrieben
-  werden.
+  Pedro Trujillo und Adem Varli.
 - **USt-IdNr.:** beantragt, wird nach Erteilung im Impressum ergänzt.
 - **EU-Plattform zur Online-Streitbeilegung:** abgeschaltet seit Juli 2025,
   der Hinweis darauf ist entfernt. Die Erklärung zur Verbraucherschlichtung
@@ -354,3 +354,61 @@ die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
   Mit echten Fotos vom Endzustand fällt der Hinweis weg.
 - **Footer:** „© 2026 RevierKlar NRW GbR · Realisiert von Mathew WebAgency“
   mit Link auf mathew-webagency.de, auf allen Seiten.
+
+## SEO (Stand Oktober 2026)
+
+Geprüft nach dem Skill `seo-technisch`. Dessen Prüfskripte und Vorlagen fehlen
+in der Installation, die Prüfungen wurden nach seinen Kriterien selbst gebaut.
+
+- **Domain:** `https://revierklar.de/` ohne www. Canonical, OG, JSON-LD,
+  robots.txt und Sitemap zeigen darauf. `.htaccess` leitet http und www per
+  301 in einem Schritt auf diese Adresse, `/index.html` auf `/`.
+- **Keyword-Landkarte:** Eine URL, ein Suchintent (Kontakt/Beauftragung).
+  Haupt: Entrümpelung Bochum. Neben: Haushaltsauflösung Bochum,
+  Kellerentrümpelung Bochum, Entrümpelung Festpreis.
+- **Title** 53 Zeichen, **Description** 151 Zeichen. Die `h1` ist der Satz
+  „Entrümpelung und Haushaltsauflösung in Bochum und im Revier.“, der Slogan
+  darüber ist ein `p` im großen Schriftbild.
+- **JSON-LD:** `WebSite` und `LocalBusiness`/`HomeAndConstructionBusiness` mit
+  Adresse, Koordinaten (OpenStreetMap), beiden Kontaktpersonen, Einsatzgebiet
+  und Leistungen; dazu `FAQPage` wortgleich mit der Seite. Keine Bewertungen,
+  keine Öffnungszeiten, kein Preisrahmen, weil dazu nichts bekannt ist.
+- **Adresse:** „Westenfelder Straße 4“ (OpenStreetMap), vorher stand dort
+  „Westenfelder 4“. Muss zeichengleich im Google-Unternehmensprofil stehen.
+- **Bilder:** sprechende Namen, WebP mit JPG-Rückfall, Breite/Höhe überall.
+  Das Nachher-Foto im Hero lädt erst nach dem Laden oder beim ersten Scrollen.
+- **Schriften:** auf Latein beschnitten (30 und 28 KB). Metrisch angepasste
+  Ersatzschriften (Arial mit size-adjust), damit beim Schriftwechsel nichts
+  springt.
+- **Hero-Auftritt** in CSS statt GSAP, damit die Überschrift (LCP-Element)
+  nicht auf das JavaScript wartet. Start bei 1 % Deckkraft, weil Chrome
+  Elemente mit 0 nicht als sichtbar zählt.
+- **Favicons** aus dem Haus im Logo: `favicon.ico`, `favicon-32.png`,
+  `apple-touch-icon.png`, `icon-192/512.png`, `site.webmanifest`.
+- **Vorschaubild** `og-revierklar.jpg` 1200 × 630.
+- **.htaccess:** Komprimierung, Cache je Dateityp (HTML immer frisch),
+  HSTS, nosniff, X-Frame-Options, Referrer- und Permissions-Policy, 404-Seite.
+
+**Lighthouse, mobil, lokal gemessen (4. Oktober 2026):**
+
+| Messart | Leistung | Barrierefreiheit | Best Practices | SEO | LCP | CLS |
+| --- | --- | --- | --- | --- | --- | --- |
+| echte Drosselung (devtools) | 99 | 100 | 100 | 100 | 1,7 s | 0 |
+| Hochrechnung (simulate) | 90 | 100 | 100 | 100 | 3,6 s | 0 |
+| Desktop | 98 | 100 | 100 | 100 | 1,1 s | 0 |
+
+Die Hochrechnung ist gegen einen lokalen Server verzerrt (alles wird in den
+ersten Millisekunden angefragt). Nach dem Livegang mit PageSpeed Insights
+gegen die echte Domain nachmessen.
+
+HTML: `html-validate` ohne Befund. Alle internen Verweise vorhanden, alle
+externen Links 200.
+
+**Nach dem Livegang, von Hand:**
+1. Live-Prüfung `pruefe_live.sh https://revierklar.de` (Hostinger-Skill).
+2. Google Search Console: Domain-Property bestätigen, Sitemap einreichen.
+3. Bing Webmaster Tools: aus der Search Console importieren.
+4. Google-Unternehmensprofil anlegen oder angleichen: RevierKlar NRW GbR,
+   Westenfelder Straße 4, 44866 Bochum, 0176 32078800, Website revierklar.de.
+5. JSON-LD im Rich-Results-Test von Google prüfen (geht nur live).
+6. PageSpeed Insights gegen revierklar.de laufen lassen.

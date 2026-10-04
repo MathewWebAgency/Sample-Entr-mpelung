@@ -18,6 +18,26 @@
 }
 
 
+/* Metrisch angepasste Ersatzschriften: Solange Cabinet und General Sans
+   laden, steht der Text in Arial, skaliert auf dieselbe Laufweite und Hoehe.
+   Beim Wechsel springt dadurch nichts (vorher CLS 0,099 im Hero).
+   Faktoren im Browser an echten Texten gemessen. */
+@font-face {
+  font-family: "Cabinet Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Arimo Bold"), local("Liberation Sans Bold"), local("Helvetica Neue Bold");
+  font-weight: 100 900; size-adjust: 89.7%; ascent-override: 97.0%; descent-override: 31.2%; line-gap-override: 10.0%;
+}
+@font-face {
+  font-family: "General Sans Fallback";
+  src: local("Arial"), local("ArialMT"), local("Arimo"), local("Liberation Sans"), local("Helvetica Neue");
+  font-weight: 100 599; size-adjust: 99.8%; ascent-override: 101.2%; descent-override: 24.0%; line-gap-override: 10.0%;
+}
+@font-face {
+  font-family: "General Sans Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Arimo Bold"), local("Liberation Sans Bold"), local("Helvetica Neue Bold");
+  font-weight: 600 900; size-adjust: 98.3%; ascent-override: 102.7%; descent-override: 24.4%; line-gap-override: 10.2%;
+}
+
 :root {
   --klar:        #F4F5F2;
   --klar-tief:   #E4E6E1;
@@ -32,8 +52,8 @@
   --linie:      rgba(26, 28, 30, 0.16);
   --linie-hell: rgba(244, 245, 242, 0.18);
 
-  --f-display: "Cabinet Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --f-text:    "General Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-display: "Cabinet Grotesk", "Cabinet Fallback", "Helvetica Neue", Arial, sans-serif;
+  --f-text:    "General Sans", "General Sans Fallback", "Helvetica Neue", Arial, sans-serif;
 
   --t-body:  1.0625rem;
   --t-lead:  clamp(1.1rem, 1.7vw, 1.3rem);
@@ -230,6 +250,9 @@ input, select, textarea { font: inherit; color: inherit; }
   hyphens: none; overflow-wrap: break-word; max-width: 14ch;
 }
 .hero-title .gruen { color: var(--revier-hell); }
+/* h1 ist der Suchwort-Satz, sieht aber aus wie der Anfang der Unterzeile */
+.hero-sub .hero-h1, .hero-sub p { display: inline; font: inherit; }
+.hero-sub .hero-h1 { font-weight: 600; }
 .hero-sub { hyphens: manual; text-wrap: pretty; margin-top: 1.3rem; max-width: 46ch; font-size: clamp(1rem, 1.6vw, 1.2rem); line-height: 1.55; color: var(--klar); text-shadow: 0 1px 14px rgba(16,18,17,0.55); }
 
 .hero-foot { margin-top: clamp(1.5rem, 3.5vh, 2.6rem); display: flex; flex-wrap: wrap; align-items: flex-end; gap: clamp(1.2rem, 4vw, 3rem); }
@@ -497,6 +520,22 @@ body:has(> main.legal) > main.legal { flex: 1 0 auto; }
 .static-mode .abl-bar { height: 100%; transform: none !important; }
 .static-mode .abl-step::before { border-color: var(--revier); background: var(--revier); }
 .static-mode .head { transition: none; }
+
+/* ---------- Hero-Auftritt ----------
+   In CSS statt GSAP, damit er mit dem ersten Bild startet und nicht auf das
+   JavaScript wartet. Die Ueberschrift ist das groesste Element (LCP) und
+   beginnt sofort. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero-img--a { animation: hero-zoom 1.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; }
+  .js .hero-logo-img { animation: hero-auf 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; --auf-y: 14px; }
+  .js .hero-title { animation: hero-auf 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; --auf-y: 26px; }
+  .js .hero-sub { animation: hero-auf 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both; --auf-y: 18px; }
+  .js .hero-foot { animation: hero-auf 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.58s both; --auf-y: 18px; }
+}
+/* Start bei 1 % statt 0: Chrome zaehlt Elemente mit Deckkraft 0 im ersten
+   Bild nicht als sichtbar, die Ueberschrift waere sonst kein LCP-Element. */
+@keyframes hero-auf { from { opacity: 0.01; transform: translate3d(0, var(--auf-y, 20px), 0); } }
+@keyframes hero-zoom { from { transform: scale(1.06); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }

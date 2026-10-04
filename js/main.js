@@ -33,6 +33,33 @@
   measureStage();
   window.addEventListener("resize", measureStage, { passive: true });
 
+  /* ---------- Nachher-Foto im Hero nachladen ----------
+     Beim Start ist es unsichtbar. Es laedt, wenn die Seite fertig ist, oder
+     spaetestens beim ersten Scrollen, bevor die Kante es freilegt. So
+     konkurriert es nicht mit Schrift und Ueberschrift um die Leitung. */
+  var nachherGeladen = false;
+  function ladeNachher() {
+    if (nachherGeladen) return;
+    nachherGeladen = true;
+    document.querySelectorAll(".hero-b [data-srcset]").forEach(function (el) {
+      el.setAttribute("srcset", el.getAttribute("data-srcset"));
+      el.removeAttribute("data-srcset");
+    });
+    var bImg = document.querySelector("[data-nachher][data-src]");
+    if (bImg) { bImg.src = bImg.getAttribute("data-src"); bImg.removeAttribute("data-src"); }
+  }
+  if (STATIC) {
+    ladeNachher();
+  } else {
+    ["scroll", "wheel", "touchstart", "keydown"].forEach(function (ev) {
+      window.addEventListener(ev, ladeNachher, { passive: true, once: true });
+    });
+    window.addEventListener("load", function () {
+      if ("requestIdleCallback" in window) requestIdleCallback(ladeNachher, { timeout: 1500 });
+      else setTimeout(ladeNachher, 300);
+    });
+  }
+
   /* ---------- Header erst nach dem Hero ----------
      Im Hero steht das grosse Logo, der Header ist ganz weg. Er blendet ein,
      wenn die Hero-Animation durch ist (siehe heroTl) bzw. im statischen
@@ -293,21 +320,12 @@
     });
   });
 
-  /* ---------- Hero: Auftritt ---------- */
-
-  var imgA = document.querySelector(".hero-img--a");
-  gsap.set(".hero-title", { opacity: 0, y: 26 });
-  gsap.set(".hero-sub, .hero-foot", { opacity: 0, y: 18 });
-  gsap.set(imgA, { scale: 1.06 });
-  gsap.set(".hero-logo-img", { opacity: 0, y: 14 });
+  /* ---------- Hero: Auftritt ----------
+     Laeuft in CSS (@keyframes hero-auf, siehe style.css), nicht hier: CSS
+     startet mit dem ersten Bild, GSAP erst nach dem Laden der Bibliotheken.
+     Auf langsamen Verbindungen stand die Ueberschrift sonst Sekunden lang
+     unsichtbar da (LCP 4,9 s statt ~2 s). */
   setWipe(0);
-
-  gsap.timeline({ delay: 0.1 })
-    .to(imgA, { scale: 1, duration: 1.9, ease: "power2.out" }, 0)
-    .to(".hero-logo-img", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.05)
-    .to(".hero-title", { opacity: 1, y: 0, duration: 0.85, ease: "power3.out" }, 0.18)
-    .to(".hero-sub", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.48)
-    .to(".hero-foot", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.6);
 
   /* ---------- Hero: die Kante, an den Scroll gekoppelt ---------- */
 
