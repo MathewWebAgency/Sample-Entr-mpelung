@@ -383,21 +383,21 @@
   /* ---------- Sektionen ---------- */
 
   gsap.utils.toArray("[data-reveal]").forEach(function (el, i) {
-    gsap.fromTo(el, { opacity: 0, y: 28 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", delay: (i % 4) * 0.06,
-        scrollTrigger: { trigger: el, start: "top 86%", once: true } });
+    gsap.fromTo(el, { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", delay: (i % 4) * 0.04,
+        scrollTrigger: { trigger: el, start: "top 94%", once: true } });
   });
 
   gsap.utils.toArray("[data-step]").forEach(function (el) {
-    gsap.fromTo(el, { opacity: 0, y: 32 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
-        scrollTrigger: { trigger: el, start: "top 84%", once: true } });
+    gsap.fromTo(el, { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.55, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 92%", once: true } });
   });
 
   gsap.utils.toArray("[data-line]").forEach(function (li) {
-    gsap.fromTo(li.children, { opacity: 0, yPercent: 70 },
-      { opacity: 1, yPercent: 0, duration: 0.6, ease: "power3.out", stagger: 0.05,
-        scrollTrigger: { trigger: li, start: "top 90%", once: true } });
+    gsap.fromTo(li.children, { opacity: 0, yPercent: 50 },
+      { opacity: 1, yPercent: 0, duration: 0.45, ease: "power3.out", stagger: 0.04,
+        scrollTrigger: { trigger: li, start: "top 96%", once: true } });
   });
 
   /* Der Balken faehrt die Schiene hinunter und schaltet die Marken um,

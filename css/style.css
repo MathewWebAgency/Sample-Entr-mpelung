@@ -526,14 +526,12 @@ body:has(> main.legal) > main.legal { flex: 1 0 auto; }
    JavaScript wartet. Die Ueberschrift ist das groesste Element (LCP) und
    beginnt sofort. */
 @media (prefers-reduced-motion: no-preference) {
-  .js .hero-img--a { animation: hero-zoom 1.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; }
-  .js .hero-logo-img { animation: hero-auf 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; --auf-y: 14px; }
-  .js .hero-title { animation: hero-auf 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; --auf-y: 26px; }
-  .js .hero-sub { animation: hero-auf 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both; --auf-y: 18px; }
-  .js .hero-foot { animation: hero-auf 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.58s both; --auf-y: 18px; }
+  .js .hero-img--a { animation: hero-zoom 1.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .js .hero-logo-img { animation: hero-auf 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; --auf-y: 12px; }
+  .js .hero-title { animation: hero-auf 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both; --auf-y: 20px; }
+  .js .hero-sub { animation: hero-auf 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both; --auf-y: 14px; }
+  .js .hero-foot { animation: hero-auf 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both; --auf-y: 14px; }
 }
-/* Start bei 1 % statt 0: Chrome zaehlt Elemente mit Deckkraft 0 im ersten
-   Bild nicht als sichtbar, die Ueberschrift waere sonst kein LCP-Element. */
 @keyframes hero-auf { from { opacity: 0.01; transform: translate3d(0, var(--auf-y, 20px), 0); } }
 @keyframes hero-zoom { from { transform: scale(1.06); } }
 
