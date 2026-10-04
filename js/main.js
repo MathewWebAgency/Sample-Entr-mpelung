@@ -41,7 +41,7 @@
     if (!stage || !kiTag || !echtTag || !telBtns.length) return;
     var btn = telBtns[telBtns.length - 1];
     var p = posIn(btn);
-    var top = Math.round(p.y + btn.offsetHeight + 6) + "px";
+    var top = Math.round(p.y + btn.offsetHeight + Math.max(6, btn.offsetHeight * 0.16)) + "px";
     var right = Math.round(stage.clientWidth - (p.x + btn.offsetWidth)) + "px";
     [kiTag, echtTag].forEach(function (t) { t.style.top = top; t.style.bottom = "auto"; t.style.right = right; t.style.left = "auto"; });
     if (STATIC && firstBtn) {

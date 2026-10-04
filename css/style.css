@@ -229,7 +229,7 @@ input, select, textarea { font: inherit; color: inherit; }
 .hero-echt-in { position: absolute; inset: 0; will-change: transform; }
 .hero-tag {
   position: absolute; right: var(--gutter); bottom: 0.5rem; margin: 0;
-  font-size: 0.72rem; font-weight: 500; line-height: 1.2; letter-spacing: 0.01em;
+  font-size: clamp(0.72rem, 0.55rem + 0.36vw, 0.92rem); font-weight: 500; line-height: 1.2; letter-spacing: 0.01em;
   color: rgba(244,245,242,0.85); text-shadow: 0 1px 4px rgba(16,18,17,0.75);
   white-space: nowrap; pointer-events: none;
 }
@@ -238,12 +238,11 @@ input, select, textarea { font: inherit; color: inherit; }
   position: absolute; right: 0.75rem; bottom: 0.75rem; margin: 0;
   padding: 0.3em 0.75em; border-radius: 999px;
   background: rgba(16,18,17,0.62); color: rgba(244,245,242,0.92);
-  font-size: 0.72rem; font-weight: 500; line-height: 1.3; letter-spacing: 0.01em;
+  font-size: clamp(0.75rem, 0.62rem + 0.3vw, 0.9rem); font-weight: 500; line-height: 1.3; letter-spacing: 0.01em;
   white-space: nowrap; pointer-events: none;
 }
 .ki-tag--vorher { left: 0.75rem; right: auto; }
 .ba-top-in { position: absolute; inset: 0; pointer-events: none; transform: translate3d(50%, 0, 0); will-change: transform; }
-@media (max-width: 47.99rem) { .ki-tag { font-size: 0.75rem; } }
 /* Grosses Logo auf einer Tafel in Headerfarbe. Die Tafel ist die spaetere
    Headerleiste im Kleinen, deshalb dieselbe Farbe und eckig wie der Header. */
 .hero-top {
@@ -492,7 +491,6 @@ a[href^="tel:"], .foot-agentur { white-space: nowrap; }
 .foot-recht, .foot-agentur, .kon-name, .tel-name { hyphens: none; }
 /* Zusammengesetzte Woerter mit Bindestrich bleiben in einer Zeile */
 .nw { white-space: nowrap; }
-.foot-ki { max-width: 48ch; }
 /* Impressum und Datenschutz im Footer der Unterseiten */
 .foot-rechtl { display: flex; flex-wrap: wrap; column-gap: 1.4rem; }
 .foot-rechtl a { min-height: 44px; display: inline-flex; align-items: center; }
@@ -545,6 +543,12 @@ body:has(> main.legal) > main.legal { flex: 1 0 auto; }
 }
 @media (max-width: 61.99rem) {
   .leist li { grid-template-columns: 1fr; }
+}
+/* Tablet: drei Knoepfe passen nicht in eine Reihe. Wie am Handy steht die
+   Besichtigung oben ueber beide Nummern, darunter die Nummern nebeneinander. */
+@media (min-width: 48rem) and (max-width: 61.99rem) {
+  .hero-cta { margin-left: 0; width: min(100%, 38rem); display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+  .hero-cta .btn--solid { grid-column: 1 / -1; }
 }
 @media (max-width: 47.99rem) {
   .hero-logo { width: 100%; }
