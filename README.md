@@ -412,3 +412,38 @@ externen Links 200.
    Westenfelder Straße 4, 44866 Bochum, 0176 32078800, Website revierklar.de.
 5. JSON-LD im Rich-Results-Test von Google prüfen (geht nur live).
 6. PageSpeed Insights gegen revierklar.de laufen lassen.
+
+## Live seit 4. Oktober 2026
+
+- **Deployment:** Hostinger deployt per Git aus `main`. Ein Push ist der
+  Upload, nach etwa 20 Sekunden ist der Stand live. Nichts von Hand hochladen.
+- **Live-Prüfung** (`pruefe_live.sh`): Startseite, Rechtstexte, robots.txt,
+  Sitemap und alle geladenen Dateien 200, 404-Test 404, http -> https.
+  Die einzige gemeldete Abweichung ist `/index.html` = 301, das ist gewollt
+  (Weiterleitung auf `/`). README, Konzept, `.git`, `.htaccess`, `.claude`
+  und `_review` sind von außen gesperrt (403/404).
+- **LiteSpeed-Eigenheit:** JavaScript wird als `application/x-javascript`
+  ausgeliefert, `ExpiresByType` greift dafür nicht. Der JS-Cache steht
+  deshalb per Dateiendung in der `.htaccess`.
+- **Bilder:** Kellerfotos zusätzlich als AVIF, jede Größe per SSIM gegen die
+  Referenz geprüft (mindestens so originalgetreu wie WebP). Reglerbilder in
+  600/900/1200, Marken-Logo als WebP 600/1200.
+- **Rich-Results-Test von Google:** 2 gültige Elemente (Lokales Unternehmen,
+  Unternehmen). Einziger Hinweis: `priceRange` fehlt (optional), bewusst
+  weggelassen, weil kein Preisrahmen genannt wurde.
+
+**Lighthouse live gegen revierklar.de:**
+
+| | Leistung | Barrierefreiheit | Best Practices | SEO | LCP | Daten |
+| --- | --- | --- | --- | --- | --- | --- |
+| Handy | 99 | 100 | 100 | 100 | 2,3 s | 496 KB |
+| Desktop | 100 | 100 | 100 | 100 | 0,6 s | 729 KB |
+
+**Noch offen, braucht die Konten des Kunden oder der Agentur:**
+1. Google Search Console: Domain-Property bestätigen (DNS-TXT bei Hostinger),
+   Sitemap `https://revierklar.de/sitemap.xml` einreichen.
+2. Bing Webmaster Tools: Property aus der Search Console importieren.
+3. Google-Unternehmensprofil: RevierKlar NRW GbR, Westenfelder Straße 4,
+   44866 Bochum, 0176 32078800, revierklar.de. Kategorie z. B.
+   „Entrümpelungsdienst“. Danach echte Bewertungen sammeln.
+4. Formular einmal echt absenden und den Eingang bei beiden prüfen.
