@@ -30,7 +30,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=2026100412">
+<link rel="stylesheet" href="css/style.css?v=2026100413">
 <script>document.documentElement.classList.add("js");</script>
 
 <script type="application/ld+json">
@@ -255,18 +255,18 @@
       <picture><source type="image/avif" srcset="assets/img/entruempelung-bochum-keller-vorher-750.avif 750w, assets/img/entruempelung-bochum-keller-vorher-1050.avif 1050w, assets/img/entruempelung-bochum-keller-vorher-1536.avif 1536w" sizes="100vw"><source type="image/webp" srcset="assets/img/entruempelung-bochum-keller-vorher-750.webp 750w, assets/img/entruempelung-bochum-keller-vorher-1050.webp 1050w, assets/img/entruempelung-bochum-keller-vorher-1536.webp 1536w" sizes="100vw"><img class="hero-img hero-img--a" src="assets/img/entruempelung-bochum-keller-vorher-1050.jpg"
            srcset="assets/img/entruempelung-bochum-keller-vorher-750.jpg 750w, assets/img/entruempelung-bochum-keller-vorher-1050.jpg 1050w, assets/img/entruempelung-bochum-keller-vorher-1536.jpg 1536w"
            sizes="100vw"
-           alt="Vollgestellter Kellerraum in Bochum vor der Entrümpelung: Kartons, Säcke und Geräte stapeln sich bis zur Werkbank"
+           alt="Echtes Foto: vollgestellter Kellerraum in Bochum vor der Entrümpelung, Kartons, Säcke und Geräte stapeln sich bis zur Werkbank"
            width="1536" height="2048" decoding="async"></picture>
       <div class="hero-b">
         <picture><source type="image/avif" data-srcset="assets/img/entruempelung-bochum-keller-nachher-750.avif 746w, assets/img/entruempelung-bochum-keller-nachher-1050.avif 1045w, assets/img/entruempelung-bochum-keller-nachher-1536.avif 1529w" sizes="100vw"><source type="image/webp" data-srcset="assets/img/entruempelung-bochum-keller-nachher-750.webp 746w, assets/img/entruempelung-bochum-keller-nachher-1050.webp 1045w, assets/img/entruempelung-bochum-keller-nachher-1536.webp 1529w" sizes="100vw"><img class="hero-img hero-img--b" data-nachher src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/img/entruempelung-bochum-keller-nachher-1050.jpg"
              data-srcset="assets/img/entruempelung-bochum-keller-nachher-750.jpg 746w, assets/img/entruempelung-bochum-keller-nachher-1050.jpg 1045w, assets/img/entruempelung-bochum-keller-nachher-1536.jpg 1529w"
              sizes="100vw"
-             alt="Derselbe Kellerraum leergeräumt und gefegt, die Werkbank steht frei"
+             alt="KI-Visualisierung: derselbe Kellerraum leergeräumt und gefegt, die Werkbank steht frei"
              width="1536" height="2048" fetchpriority="low" decoding="async"></picture>
         <noscript><picture><source type="image/avif" srcset="assets/img/entruempelung-bochum-keller-nachher-750.avif 746w, assets/img/entruempelung-bochum-keller-nachher-1050.avif 1045w, assets/img/entruempelung-bochum-keller-nachher-1536.avif 1529w" sizes="100vw"><source type="image/webp" srcset="assets/img/entruempelung-bochum-keller-nachher-750.webp 746w, assets/img/entruempelung-bochum-keller-nachher-1050.webp 1045w, assets/img/entruempelung-bochum-keller-nachher-1536.webp 1529w" sizes="100vw"><img class="hero-img hero-img--b" src="assets/img/entruempelung-bochum-keller-nachher-1050.jpg"
              srcset="assets/img/entruempelung-bochum-keller-nachher-750.jpg 746w, assets/img/entruempelung-bochum-keller-nachher-1050.jpg 1045w, assets/img/entruempelung-bochum-keller-nachher-1536.jpg 1529w"
              sizes="100vw"
-             alt="Derselbe Kellerraum leergeräumt und gefegt, die Werkbank steht frei"
+             alt="KI-Visualisierung: derselbe Kellerraum leergeräumt und gefegt, die Werkbank steht frei"
              width="1536" height="2048" decoding="async"></picture></noscript>
       </div>
       <span class="hero-seam" aria-hidden="true"></span>
@@ -285,8 +285,10 @@
       </div>
     </div>
 
-    <!-- KI-Hinweis liegt auf dem Nachher-Bild: Er faehrt mit derselben Kante
-         herein und ist nur zu sehen, wo das Nachher-Bild zu sehen ist. -->
+    <!-- Kennzeichnung direkt am Bild: "Echtes Foto" liegt auf dem Vorher-Foto,
+         "KI-Visualisierung" auf dem Nachher-Bild. Beide Ebenen fahren mit der
+         Kante, jeder Hinweis ist nur dort zu sehen, wo sein Bild zu sehen ist. -->
+    <div class="hero-echt"><div class="hero-echt-in"><p class="ki-tag">Echtes Foto</p></div></div>
     <div class="hero-ki"><div class="hero-ki-in"><p class="ki-tag"><span class="nw">KI-Visualisierung</span></p></div></div>
 
     <div class="hero-copy">
@@ -328,16 +330,17 @@
   <div class="ba-wrap">
     <figure class="ba" data-ba>
       <div class="ba-frame">
-        <picture><source type="image/avif" srcset="assets/img/kellerentruempelung-bochum-nachher-600.avif 600w, assets/img/kellerentruempelung-bochum-nachher-900.avif 900w, assets/img/kellerentruempelung-bochum-nachher-1200.avif 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><source type="image/webp" srcset="assets/img/kellerentruempelung-bochum-nachher-600.webp 600w, assets/img/kellerentruempelung-bochum-nachher-900.webp 900w, assets/img/kellerentruempelung-bochum-nachher-1200.webp 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><img class="ba-img" src="assets/img/kellerentruempelung-bochum-nachher-900.jpg" srcset="assets/img/kellerentruempelung-bochum-nachher-600.jpg 600w, assets/img/kellerentruempelung-bochum-nachher-900.jpg 900w, assets/img/kellerentruempelung-bochum-nachher-1200.jpg 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)" alt="Derselbe Kellerraum nach der Räumung: das Regal steht leer, der Boden ist gefegt" width="1200" height="1600" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/avif" srcset="assets/img/kellerentruempelung-bochum-nachher-600.avif 600w, assets/img/kellerentruempelung-bochum-nachher-900.avif 900w, assets/img/kellerentruempelung-bochum-nachher-1200.avif 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><source type="image/webp" srcset="assets/img/kellerentruempelung-bochum-nachher-600.webp 600w, assets/img/kellerentruempelung-bochum-nachher-900.webp 900w, assets/img/kellerentruempelung-bochum-nachher-1200.webp 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><img class="ba-img" src="assets/img/kellerentruempelung-bochum-nachher-900.jpg" srcset="assets/img/kellerentruempelung-bochum-nachher-600.jpg 600w, assets/img/kellerentruempelung-bochum-nachher-900.jpg 900w, assets/img/kellerentruempelung-bochum-nachher-1200.jpg 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)" alt="KI-Visualisierung: derselbe Kellerraum nach der Räumung, das Regal steht leer, der Boden ist gefegt" width="1200" height="1600" loading="lazy" decoding="async"></picture>
         <p class="ki-tag ki-tag--ba"><span class="nw">KI-Visualisierung</span></p>
         <div class="ba-top">
-          <picture><source type="image/avif" srcset="assets/img/kellerentruempelung-bochum-vorher-600.avif 600w, assets/img/kellerentruempelung-bochum-vorher-900.avif 900w, assets/img/kellerentruempelung-bochum-vorher-1200.avif 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><source type="image/webp" srcset="assets/img/kellerentruempelung-bochum-vorher-600.webp 600w, assets/img/kellerentruempelung-bochum-vorher-900.webp 900w, assets/img/kellerentruempelung-bochum-vorher-1200.webp 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><img class="ba-img ba-img--top" src="assets/img/kellerentruempelung-bochum-vorher-900.jpg" srcset="assets/img/kellerentruempelung-bochum-vorher-600.jpg 600w, assets/img/kellerentruempelung-bochum-vorher-900.jpg 900w, assets/img/kellerentruempelung-bochum-vorher-1200.jpg 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)" alt="Kellerraum vor der Räumung: Regal und Boden voll mit Säcken, Kartons und Hausrat" width="1200" height="1600" loading="lazy" decoding="async"></picture>
+          <picture><source type="image/avif" srcset="assets/img/kellerentruempelung-bochum-vorher-600.avif 600w, assets/img/kellerentruempelung-bochum-vorher-900.avif 900w, assets/img/kellerentruempelung-bochum-vorher-1200.avif 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><source type="image/webp" srcset="assets/img/kellerentruempelung-bochum-vorher-600.webp 600w, assets/img/kellerentruempelung-bochum-vorher-900.webp 900w, assets/img/kellerentruempelung-bochum-vorher-1200.webp 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)"><img class="ba-img ba-img--top" src="assets/img/kellerentruempelung-bochum-vorher-900.jpg" srcset="assets/img/kellerentruempelung-bochum-vorher-600.jpg 600w, assets/img/kellerentruempelung-bochum-vorher-900.jpg 900w, assets/img/kellerentruempelung-bochum-vorher-1200.jpg 1200w" sizes="(min-width: 50rem) 720px, calc(100vw - 3rem)" alt="Echtes Foto: Kellerraum vor der Räumung, Regal und Boden voll mit Säcken, Kartons und Hausrat" width="1200" height="1600" loading="lazy" decoding="async"></picture>
+          <div class="ba-top-in"><p class="ki-tag ki-tag--ba ki-tag--vorher">Echtes Foto</p></div>
         </div>
         <span class="ba-seam" aria-hidden="true"><span class="ba-grip"></span></span>
         <input class="ba-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Vergleich Keller: Regler nach links zeigt vorher, nach rechts zeigt nachher">
       </div>
       <p class="ba-ends" aria-hidden="true"><span>Vorher</span><span>Nachher</span></p>
-      <figcaption class="ba-cap">Ein Keller in Bochum aus einem echten Auftrag, gezeigt mit Einverständnis der Eigentümer. Das <span class="nw">Nachher-Bild</span> ist eine mit KI erzeugte Visualisierung desselben Raums.</figcaption>
+      <figcaption class="ba-cap">Die <span class="nw">Vorher-Aufnahmen</span> stammen aus einem echten Auftrag und werden mit Einverständnis der Eigentümer gezeigt. Die <span class="nw">Nachher-Ansichten</span> sind <span class="nw">KI-Visualisierungen</span> desselben Raumes im geräumten Zustand und werden durch eigene Fotos ersetzt, sobald sie vorliegen.</figcaption>
     </figure>
   </div>
 </section>
@@ -412,6 +415,29 @@
     <li>Hattingen</li>
   </ul>
   <p class="gebiet-more">Ihr Ort ist nicht dabei? Fragen Sie trotzdem, meistens klappt es.</p>
+</section>
+
+<!-- ============ PARTNER ============ -->
+<section class="sec sec--partner" id="partner" aria-labelledby="partner-t">
+  <div class="partner">
+    <div class="partner-text" data-reveal>
+      <h2 class="sec-title" id="partner-t">Was draußen anfällt, macht unser <span class="gruen">Partner.</span></h2>
+      <p class="sec-lead">Nach einer Räumung bleibt manchmal auch im Garten etwas zu tun. Dafür arbeiten wir mit Berisha <span class="nw">Garten- und</span> Landschaftsbau aus Witten zusammen: Hecken, Bäume, Pflaster und Zäune. Ein Betrieb aus dem Revier, auf den wir uns verlassen.</p>
+    </div>
+    <!-- Signet originalgetreu als SVG nachgezeichnet (Projekt GaLaBau Berisha), liegt inline: keine Verbindung zu fremden Servern -->
+    <a class="partner-karte" href="https://rb-galabau-witten.de/" target="_blank" rel="noopener" data-reveal>
+      <span class="partner-mit">In Zusammenarbeit mit</span>
+      <span class="partner-marke">
+        <svg class="partner-signet" viewBox="-2 -2 126 150" aria-hidden="true" focusable="false">
+          <g fill="#7AB51D"><path d="M64 50C40 38 40 12 50 1C66 12 76 30 64 50Z"/><path d="M50 56C40 40 15 38 0 48C15 62 40 70 50 56Z"/><path d="M74 55C80 36 105 30 121 36C108 52 88 64 74 55Z"/></g>
+          <g fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"><path d="M54 9Q63 26 63.5 47"/><path d="M11 48.5Q31 47 48.5 56"/><path d="M76 53Q94 41 113 37.5"/></g>
+          <g fill="none" stroke="#1A181D" stroke-width="10"><path d="M26 143V109A8 8 0 0 1 34 101H79.5"/><path d="M62 56V121"/><ellipse cx="79.5" cy="119.5" rx="17.5" ry="18.5"/></g>
+        </svg>
+        <span class="partner-wort"><span class="partner-name">Berisha</span><span class="partner-zusatz"><span class="nw">Garten- und</span> Landschaftsbau</span></span>
+      </span>
+      <span class="partner-link"><span class="nw">rb-galabau-witten.de</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"> (öffnet in neuem Tab)</span></span>
+    </a>
+  </div>
 </section>
 
 <!-- ============ FRAGEN ============ -->
@@ -504,8 +530,8 @@
         <textarea id="f-txt" name="nachricht" rows="4" placeholder="Etage, Aufzug, bis wann es fertig sein muss"></textarea>
       </div>
       <label class="f-check">
-        <input type="checkbox" name="datenschutz" value="ja" required>
-        <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</span>
+        <input type="checkbox" name="datenschutz" value="zur Kenntnis genommen" required>
+        <span>Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
       </label>
       <button class="btn btn--solid btn--wide f-send" type="submit">Anfrage senden</button>
       <p class="f-status" role="status" aria-live="polite"></p>
@@ -538,7 +564,7 @@
 <script src="assets/js/gsap.min.js" defer></script>
 <script src="assets/js/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/lenis.min.js" defer></script>
-<script src="js/main.js?v=2026100412" defer></script>
+<script src="js/main.js?v=2026100413" defer></script>
 <script>document.querySelectorAll("[data-jahr]").forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>

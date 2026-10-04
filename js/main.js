@@ -19,20 +19,25 @@
   var seam = document.querySelector(".hero-seam");
   var kiWrap = document.querySelector(".hero-ki");
   var kiIn = document.querySelector(".hero-ki-in");
+  var echtWrap = document.querySelector(".hero-echt");
+  var echtIn = document.querySelector(".hero-echt-in");
   var stageW = 0;
 
   /* Auf dem Handy ist unter den Knoepfen kein Platz fuer den KI-Hinweis.
      Dort steht er oben links, knapp unter dem grossen Logo. Gemessen per
      offset*, das von den Animationen (transform) unberuehrt bleibt. */
-  var kiTag = document.querySelector(".hero-ki .ki-tag");
+  var kiTags = document.querySelectorAll(".hero-ki .ki-tag, .hero-echt .ki-tag");
   var kiLogo = document.querySelector(".hero-logo");
   function placeKi() {
-    if (!kiTag || !kiLogo || !stage) return;
-    if (window.innerWidth >= 768) { kiTag.style.top = ""; kiTag.style.bottom = ""; return; }
-    var y = 0, el = kiLogo;
-    while (el && el !== stage) { y += el.offsetTop; el = el.offsetParent; }
-    kiTag.style.top = Math.round(y + kiLogo.offsetHeight + 12) + "px";
-    kiTag.style.bottom = "auto";
+    if (!kiLogo || !stage) return;
+    var top = "", bottom = "";
+    if (window.innerWidth < 768) {
+      var y = 0, el = kiLogo;
+      while (el && el !== stage) { y += el.offsetTop; el = el.offsetParent; }
+      top = Math.round(y + kiLogo.offsetHeight + 12) + "px";
+      bottom = "auto";
+    }
+    kiTags.forEach(function (t) { t.style.top = top; t.style.bottom = bottom; });
   }
 
   function measureStage() { stageW = stage ? stage.getBoundingClientRect().width : 0; placeKi(); }
@@ -45,6 +50,9 @@
     if (imgB) imgB.style.transform = "translate3d(" + (-off) + "%,0,0)";
     if (kiWrap) kiWrap.style.transform = "translate3d(" + off + "%,0,0)";
     if (kiIn) kiIn.style.transform = "translate3d(" + (-off) + "%,0,0)";
+    var rest = (v * 100).toFixed(3);
+    if (echtWrap) echtWrap.style.transform = "translate3d(" + rest + "%,0,0)";
+    if (echtIn) echtIn.style.transform = "translate3d(" + (-rest) + "%,0,0)";
     if (seam) seam.style.transform = "translate3d(" + (v * stageW).toFixed(2) + "px,0,0)";
   }
 
@@ -112,6 +120,7 @@
     var top = fig.querySelector(".ba-top");
     var topImg = fig.querySelector(".ba-img--top");
     var line = fig.querySelector(".ba-seam");
+    var topTag = fig.querySelector(".ba-top-in");
     if (!frame || !range || !top || !topImg || !line) return;
 
     function setPos(p) {
@@ -119,6 +128,7 @@
       var off = ((p - 1) * 100).toFixed(3);
       top.style.transform = "translate3d(" + off + "%,0,0)";
       topImg.style.transform = "translate3d(" + (-off) + "%,0,0)";
+      if (topTag) topTag.style.transform = "translate3d(" + (-off) + "%,0,0)";
       line.style.transform = "translate3d(" + off + "%,0,0)";
       range.value = (p * 100).toFixed(1);
     }
@@ -232,7 +242,7 @@
           row.appendChild(msg);
         } else if (box) {
           box.classList.add("is-bad");
-          msg.textContent = "Bitte kurz zustimmen, sonst dürfen wir Ihre Anfrage nicht bearbeiten.";
+          msg.textContent = "Bitte setzen Sie hier noch kurz das Häkchen.";
           box.parentNode.insertBefore(msg, box.nextSibling);
         }
         if (!bad) bad = field;
