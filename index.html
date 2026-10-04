@@ -30,7 +30,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=2026100414">
+<link rel="stylesheet" href="css/style.css?v=2026100415">
 <script>document.documentElement.classList.add("js");</script>
 
 <script type="application/ld+json">
@@ -487,7 +487,11 @@
       <p class="kon-adr">RevierKlar NRW GbR<br>Westenfelder Straße 4, 44866 Bochum</p>
     </div>
 
-    <form class="kon-form" action="https://formspree.io/f/mwlpgjlr" method="POST" novalidate>
+    <!-- Ohne JavaScript kein Versand: Die Formspree-Adresse steht nur in
+         data-action, ein klassisches Absenden wuerde sonst auf der Seite von
+         Formspree (mit reCAPTCHA) landen. -->
+    <noscript><p class="f-ohne-js">Das Formular braucht JavaScript. Rufen Sie uns einfach an oder schreiben Sie an <a href="mailto:info@revierklar.de">info@revierklar.de</a>.</p></noscript>
+    <form class="kon-form" data-action="https://formspree.io/f/mwlpgjlr" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Neue Anfrage über revierklar.de">
       <div class="f-topf" aria-hidden="true">
         <label for="f-website">Bitte leer lassen</label>
@@ -564,7 +568,7 @@
 <script src="assets/js/gsap.min.js" defer></script>
 <script src="assets/js/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/lenis.min.js" defer></script>
-<script src="js/main.js?v=2026100414" defer></script>
+<script src="js/main.js?v=2026100415" defer></script>
 <script>document.querySelectorAll("[data-jahr]").forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>

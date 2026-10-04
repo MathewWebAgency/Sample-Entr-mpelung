@@ -250,8 +250,8 @@
 
       if (bad) { status.textContent = "Da fehlt noch eine Angabe."; bad.focus(); return; }
 
-      /* Versand an Formspree. Ohne JavaScript schickt der Browser dasselbe
-         Formular klassisch ab und landet auf der Dankeseite von Formspree. */
+      /* Versand an Formspree, nur hier per JavaScript. Die Adresse steht in
+         data-action, ohne JavaScript wird das Formular gar nicht gezeigt. */
       var send = form.querySelector(".f-send");
       var sendLabel = send.textContent;
       send.disabled = true;
@@ -263,7 +263,7 @@
         email: "Diese <span class=\"nw\">E-Mail-Adresse</span> sieht nicht vollständig aus."
       };
 
-      fetch(form.action, {
+      fetch(form.getAttribute("data-action"), {
         method: "POST",
         body: new FormData(form),
         headers: { "Accept": "application/json" }

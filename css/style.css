@@ -419,6 +419,7 @@ html:not(.js) .hero-echt { transform: translate3d(50%, 0, 0); }
 html:not(.js) .hero-echt-in { transform: translate3d(-50%, 0, 0); }
 html:not(.js) .hero-echt .ki-tag { left: auto; right: var(--gutter); }
 html:not(.js) .faq-a { grid-template-rows: 1fr; }
+html:not(.js) .kon-form { display: none; }
 html:not(.js) .faq-a-in p { opacity: 1; transform: none; }
 html:not(.js) .faq-ico { display: none; }
 
@@ -461,6 +462,8 @@ html:not(.js) .faq-ico { display: none; }
 .f-done:focus { outline: none; }
 .f-done h3 { text-wrap: balance; font-family: var(--f-display); font-weight: 800; font-size: var(--t-h3); letter-spacing: -0.028em; text-transform: uppercase; color: var(--revier-hell); margin-bottom: 0.6rem; }
 .f-done p { color: var(--klar); }
+.f-ohne-js { padding: clamp(1.6rem, 4vw, 2.4rem); border: 1px solid var(--linie-hell); border-radius: var(--r-feld); }
+.f-ohne-js a { text-decoration: underline; text-underline-offset: 3px; }
 .f-status { font-size: 0.95rem; font-weight: 600; color: var(--revier-hell); min-height: 1.5em; }
 .f-row.is-bad input, .f-row.is-bad select, .f-row.is-bad textarea { border-color: #E4603A; }
 .f-check.is-bad { color: #E4603A; }
