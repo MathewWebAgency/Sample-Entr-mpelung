@@ -45,7 +45,7 @@ AddType image/avif .avif
 # ---------- Cache ----------
 # CSS und main.js tragen ?v=JJJJMMTTnn und duerfen lange liegen, die
 # Bibliotheken (gsap, lenis) aendern sich nie. Bilder und Schriften selten.
-# LiteSpeed meldet JS als text/javascript, deshalb beide Typen.
+# JS-Cache steht unten per Dateiendung (LiteSpeed: application/x-javascript).
 # HTML immer frisch pruefen, damit neue Versionen sofort ankommen.
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -68,6 +68,11 @@ AddType image/avif .avif
   </FilesMatch>
   <FilesMatch "\.(woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # JS ueber die Endung, weil LiteSpeed den Typ als application/x-javascript
+  # meldet und ExpiresByType dann nicht greift. main.js traegt ?v=...
+  <FilesMatch "\.js$">
+    Header set Cache-Control "public, max-age=31536000"
   </FilesMatch>
 
   # ---------- Sicherheit ----------
