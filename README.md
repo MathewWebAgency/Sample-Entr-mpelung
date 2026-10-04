@@ -352,7 +352,7 @@ die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
   (Art. 50) eine Kennzeichnung KI-erzeugter Bilder, die echte Orte zeigen, und
   ohne Hinweis wäre ein Nachher-Bild als Leistungsnachweis irreführend (UWG).
   Mit echten Fotos vom Endzustand fällt der Hinweis weg.
-- **Footer:** „© 2026 RevierKlar NRW GbR · Realisiert von Mathew WebAgency“
+- **Footer:** „© [Jahr] RevierKlar NRW GbR · Realisiert von Mathew WebAgency“, das Jahr setzt ein Einzeiler am Seitenende automatisch (Grundwert 2026 ohne JavaScript)
   mit Link auf mathew-webagency.de, auf allen Seiten.
 
 ## SEO (Stand Oktober 2026)

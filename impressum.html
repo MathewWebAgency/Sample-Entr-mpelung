@@ -47,8 +47,9 @@
 </div></main>
 <footer class="foot">
   <div class="foot-unten">
-    <p class="foot-recht">&copy; 2026 RevierKlar NRW GbR<span class="foot-trenner" aria-hidden="true">·</span><span class="foot-agentur">Realisiert von <a href="https://mathew-webagency.de/" rel="noopener">Mathew WebAgency</a></span></p>
+    <p class="foot-recht">&copy; <span data-jahr>2026</span> RevierKlar NRW GbR<span class="foot-trenner" aria-hidden="true">·</span><span class="foot-agentur">Realisiert von <a href="https://mathew-webagency.de/" rel="noopener">Mathew WebAgency</a></span></p>
   </div>
 </footer>
+<script>document.querySelectorAll("[data-jahr]").forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
 </body>
 </html>
