@@ -339,7 +339,7 @@ die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
 
 ## Rechtliches, Stand Oktober 2026
 
-- **Rechtsform:** RevierKlar NRW GbR, vertreten durch die Gesellschafter
+- **Rechtsform:** Varli/Trujillo Luque GbR (Geschäftsbezeichnung RevierKlar), vertreten durch die Gesellschafter
   Pedro Trujillo und Adem Varli.
 - **USt-IdNr.:** beantragt, wird nach Erteilung im Impressum ergänzt.
 - **EU-Plattform zur Online-Streitbeilegung:** abgeschaltet seit Juli 2025,
@@ -352,7 +352,7 @@ die 1536er-Fassung, vorher wurde ein 1050er-Bild doppelt hochgezogen.
   (Art. 50) eine Kennzeichnung KI-erzeugter Bilder, die echte Orte zeigen, und
   ohne Hinweis wäre ein Nachher-Bild als Leistungsnachweis irreführend (UWG).
   Mit echten Fotos vom Endzustand fällt der Hinweis weg.
-- **Footer:** „© [Jahr] RevierKlar NRW GbR · Realisiert von Mathew WebAgency“, das Jahr setzt ein Einzeiler am Seitenende automatisch (Grundwert 2026 ohne JavaScript)
+- **Footer:** „© [Jahr] Varli/Trujillo Luque GbR · Realisiert von Mathew WebAgency“, das Jahr setzt ein Einzeiler am Seitenende automatisch (Grundwert 2026 ohne JavaScript)
   mit Link auf mathew-webagency.de, auf allen Seiten.
 
 ## SEO (Stand Oktober 2026)
@@ -408,7 +408,7 @@ externen Links 200.
 1. Live-Prüfung `pruefe_live.sh https://revierklar.de` (Hostinger-Skill).
 2. Google Search Console: Domain-Property bestätigen, Sitemap einreichen.
 3. Bing Webmaster Tools: aus der Search Console importieren.
-4. Google-Unternehmensprofil anlegen oder angleichen: RevierKlar NRW GbR,
+4. Google-Unternehmensprofil anlegen oder angleichen: Varli/Trujillo Luque GbR,
    Westenfelder Straße 4, 44866 Bochum, 0176 32078800, Website revierklar.de.
 5. JSON-LD im Rich-Results-Test von Google prüfen (geht nur live).
 6. PageSpeed Insights gegen revierklar.de laufen lassen.
@@ -443,7 +443,7 @@ externen Links 200.
 1. Google Search Console: Domain-Property bestätigen (DNS-TXT bei Hostinger),
    Sitemap `https://revierklar.de/sitemap.xml` einreichen.
 2. Bing Webmaster Tools: Property aus der Search Console importieren.
-3. Google-Unternehmensprofil: RevierKlar NRW GbR, Westenfelder Straße 4,
+3. Google-Unternehmensprofil: Varli/Trujillo Luque GbR, Westenfelder Straße 4,
    44866 Bochum, 0176 32078800, revierklar.de. Kategorie z. B.
    „Entrümpelungsdienst“. Danach echte Bewertungen sammeln.
 4. Formular einmal echt absenden und den Eingang bei beiden prüfen.
